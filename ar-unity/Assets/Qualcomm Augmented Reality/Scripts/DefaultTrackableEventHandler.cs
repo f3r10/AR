@@ -81,6 +81,11 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
             component.enabled = true;
         }
 
+        // For debug
+        #if UNITY_ANDROID && !UNITY_EDITOR
+                SetIdTarget();
+        #endif
+
         Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
     }
 
@@ -103,6 +108,15 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
         }
 
         Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+    }
+
+    private void SetIdTarget()
+    {
+        using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
+        {
+            androidJavaClass.SetStatic("idTargetData", mTrackableBehaviour.TrackableName);
+
+        }
     }
 
     #endregion // PRIVATE_METHODS

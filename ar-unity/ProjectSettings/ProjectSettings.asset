@@ -10,8 +10,8 @@ PlayerSettings:
   targetGlesGraphics: -1
   targetResolution: 0
   accelerometerFrequency: 60
-  companyName: Facultad Sistemas EPN
-  productName: Museo RA
+  companyName: CPQ Team
+  productName: Museo AR
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   defaultScreenWidth: 1024
@@ -65,10 +65,10 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  iPhoneBundleIdentifier: com.fis.ra
+  iPhoneBundleIdentifier: com.fis.epn
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
-  productGUID: b008815e30120804eb1cac48b31fd854
+  productGUID: b9d71178c0e40a14b944ee09bf8e1e17
   iPhoneBundleVersion: 1.0
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 10
@@ -150,7 +150,7 @@ PlayerSettings:
   flashStrippingLevel: 2
   spritePackerPolicy: 
   scriptingDefineSymbols: {}
-  metroPackageName: Museo RA
+  metroPackageName: ar-unity
   metroPackageLogo: 
   metroPackageLogo140: 
   metroPackageLogo180: 
@@ -161,7 +161,7 @@ PlayerSettings:
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Museo RA
+  metroApplicationDescription: ar-unity
   metroStoreTileLogo80: 
   metroStoreTileLogo: 
   metroStoreTileLogo140: 
