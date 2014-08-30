@@ -65,7 +65,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  iPhoneBundleIdentifier: com.fis.epn
+  iPhoneBundleIdentifier: com.fis.ra
   metroEnableIndependentInputSource: 0
   metroEnableLowLatencyPresentationAPI: 0
   productGUID: b9d71178c0e40a14b944ee09bf8e1e17
