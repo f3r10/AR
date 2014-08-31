@@ -16,7 +16,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
  
     private TrackableBehaviour mTrackableBehaviour;
     Renderer[] rendererComponents;
-
+    string idTargetDataUnity;
     // use only is necessary
     // Collider[] colliderComponents;
 
@@ -103,6 +103,18 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 
     private void OnTrackingLost()
     {
+        // 1. inicializated application
+        if (idTargetDataUnity.Equals(null))
+        {
+            //call to android, show toast "enfoque a un objeto para reconocer"
+        } 
+        else
+        {
+            // 2. tracking on and now lost, data 
+        }
+
+
+
         rendererComponents = GetComponentsInChildren<Renderer>(true);
 
         // use only is necessary
