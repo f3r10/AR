@@ -15,7 +15,11 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
     #region PRIVATE_MEMBER_VARIABLES
  
     private TrackableBehaviour mTrackableBehaviour;
-    
+    Renderer[] rendererComponents;
+
+    // use only is necessary
+    // Collider[] colliderComponents;
+
     #endregion // PRIVATE_MEMBER_VARIABLES
 
 
@@ -66,20 +70,27 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 
     private void OnTrackingFound()
     {
-        Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
-        Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
+        rendererComponents = GetComponentsInChildren<Renderer>(true);
+
+        // use only is necessary
+        // colliderComponents = GetComponentsInChildren<Collider>(true);
 
         // Enable rendering:
         foreach (Renderer component in rendererComponents)
         {
             component.enabled = true;
+            
+            // use only videogames
+            // component.gameObject.SetActive(true);
         }
 
+        // use only is necessary
         // Enable colliders:
-        foreach (Collider component in colliderComponents)
-        {
-            component.enabled = true;
-        }
+        //foreach (Collider component in colliderComponents)
+        //{
+        //    component.enabled = true;
+        //}
+
 
         // For debug
         #if UNITY_ANDROID && !UNITY_EDITOR
@@ -92,31 +103,43 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 
     private void OnTrackingLost()
     {
-        Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
-        Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
+        rendererComponents = GetComponentsInChildren<Renderer>(true);
+
+        // use only is necessary
+        // colliderComponents = GetComponentsInChildren<Collider>(true);
 
         // Disable rendering:
         foreach (Renderer component in rendererComponents)
         {
             component.enabled = false;
+
+            // use only videogames
+            // component.gameObject.SetActive(false);
         }
 
+        // use only is necessary
         // Disable colliders:
-        foreach (Collider component in colliderComponents)
-        {
-            component.enabled = false;
-        }
+        //foreach (Collider component in colliderComponents)
+        //{
+        //    component.enabled = false;
+        //}
 
         Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
     }
 
     private void SetIdTarget()
     {
+        #if UNITY_ANDROID
+
         using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
         {
             androidJavaClass.SetStatic("idTargetData", mTrackableBehaviour.TrackableName);
 
         }
+
+        #endif
+
+        //preprocessor directives for other platforms:
     }
 
     #endregion // PRIVATE_METHODS

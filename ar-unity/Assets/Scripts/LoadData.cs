@@ -9,7 +9,7 @@ public class LoadData : MonoBehaviour
     string persistentXmlPath;
     ImageTracker tracker;
 
-    #if UNITY_ANDROID
+    #if UNITY_ANDROID && !UNITY_EDITOR
 
     void Start()
     {
