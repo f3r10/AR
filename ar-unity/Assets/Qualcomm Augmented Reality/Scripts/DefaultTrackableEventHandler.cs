@@ -28,6 +28,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
     
     void Start()
     {
+        idTargetDataUnity = null;
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
         if (mTrackableBehaviour)
         {
@@ -60,7 +61,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
             OnTrackingLost();
         }
     }
-
+    
     #endregion // PUBLIC_METHODS
 
 
@@ -70,50 +71,74 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 
     private void OnTrackingFound()
     {
-        rendererComponents = GetComponentsInChildren<Renderer>(true);
-
-        // use only is necessary
-        // colliderComponents = GetComponentsInChildren<Collider>(true);
-
-        // Enable rendering:
-        foreach (Renderer component in rendererComponents)
+        // if old targer is equals to new target, do nothig, else if is no equals
+        // two cases: start app or recognize new target (diferent to old target)
+        if (!idTargetDataUnity.Equals(mTrackableBehaviour.TrackableName))
         {
-            component.enabled = true;
-            
-            // use only videogames
-            // component.gameObject.SetActive(true);
-        }
+            idTargetDataUnity = mTrackableBehaviour.TrackableName;
 
-        // use only is necessary
-        // Enable colliders:
-        //foreach (Collider component in colliderComponents)
-        //{
-        //    component.enabled = true;
-        //}
+            rendererComponents = GetComponentsInChildren<Renderer>(true);
+
+            // use only is necessary
+            // colliderComponents = GetComponentsInChildren<Collider>(true);
+
+            // Enable rendering:
+            foreach (Renderer component in rendererComponents)
+            {
+                component.enabled = true;
+
+                // use only videogames
+                // component.gameObject.SetActive(true);
+            }
+
+            // use only is necessary
+            // Enable colliders:
+            //foreach (Collider component in colliderComponents)
+            //{
+            //    component.enabled = true;
+            //}
 
 
-        // For debug
-        #if UNITY_ANDROID && !UNITY_EDITOR
-                SetIdTarget();
-        #endif
+            // For debug
+            #if UNITY_ANDROID && !UNITY_EDITOR
+            ShowMobileToast("SetIdTarget", idTargetDataUnity);
+            #endif
 
-        Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+
+            #if UNITY_EDITOR
+            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+            #endif
+            //CONSULTA DB
+        } 
+
     }
-
 
     private void OnTrackingLost()
     {
         // 1. inicializated application
         if (idTargetDataUnity.Equals(null))
         {
-            //call to android, show toast "enfoque a un objeto para reconocer"
+            //call to android, show toast "no focus"
+            ShowMobileToast("ShowToastNoFocus");
+
+            // For debug
+            #if UNITY_EDITOR
+            Debug.Log("Focus camera to object");
+            #endif
         } 
         else
         {
-            // 2. tracking on and now lost, data 
+            // 2. tracking lost after tracking on
+            ShowMobileToast("ShowToastTrackingLost",idTargetDataUnity);
+            
+            // For debug
+            #if UNITY_EDITOR
+            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+            #endif
+            //FALTAN ACCIONES
         }
 
-
+        //PARA GAMEOBJECTS U OBJETOS EN 3D
 
         rendererComponents = GetComponentsInChildren<Renderer>(true);
 
@@ -136,22 +161,29 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
         //    component.enabled = false;
         //}
 
-        Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+        
     }
 
-    private void SetIdTarget()
+    // methods for toast, preprocessor directives for all platforms (only android for this project)
+
+    private void ShowMobileToast(string methodName)
     {
         #if UNITY_ANDROID
-
         using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
         {
-            androidJavaClass.SetStatic("idTargetData", mTrackableBehaviour.TrackableName);
-
+            androidJavaClass.CallStatic(methodName);
         }
+        #endif   
+    }
 
+    private void ShowMobileToast(string methodName, params object[] args)
+    {
+        #if UNITY_ANDROID
+        using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
+        {
+            androidJavaClass.CallStatic(methodName,args);
+        }
         #endif
-
-        //preprocessor directives for other platforms:
     }
 
     #endregion // PRIVATE_METHODS
