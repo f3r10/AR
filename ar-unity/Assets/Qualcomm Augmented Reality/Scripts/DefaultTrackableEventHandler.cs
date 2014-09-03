@@ -28,7 +28,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
     
     void Start()
     {
-        idTargetDataUnity = null;
+        idTargetDataUnity = "";
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
         if (mTrackableBehaviour)
         {
@@ -116,10 +116,11 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
     private void OnTrackingLost()
     {
         // 1. inicializated application
-        if (idTargetDataUnity.Equals(null))
+        if (idTargetDataUnity.Equals(""))
         {
             //call to android, show toast "no focus"
             ShowMobileToast("ShowToastNoFocus");
+
 
             // For debug
             #if UNITY_EDITOR
