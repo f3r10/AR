@@ -86,15 +86,17 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
         // 3. Set trackable name
         ResourceManager.Instance.NameARObject = mTrackableBehaviour.name;
 
-        // 4. Query DB
+        // 4. Set: recognized object
+        ResourceManager.Instance.IsObjectRecognized = true;
+
+        // 5. Query DB
         DataBase.GetComponent<QueryDatabase>().GetNumberOfResources(ResourceManager.Instance.NameARObject,
                                                                     ResourceManager.Instance.LanguageInterface);
 
-        // 5. Render 3D objects and active children gameobject
+        // 6. Render 3D objects and active children gameobject
         RenderingObjects(true);
 
-        // 6. Set: recognized object
-        ResourceManager.Instance.IsObjectRecognized = false;
+        
 
         Debug.Log("Load Data ofTrackable " + mTrackableBehaviour.TrackableName + " OK");
     }
@@ -170,7 +172,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 
     private void OnTrackingLost()
     {
-        // BUG RESOLVED: SEE LoadData gameobject and StatusRecognition script
+        // BUG RESOLVED: SEE StatusRecognition gameobject and StatusRecognition script
         //// 1. Inicializated application
         //if (ResourceManager.Instance.NameARObject.Equals(""))
         //{
