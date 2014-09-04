@@ -3,6 +3,7 @@ package com.fis.ra;
 import com.qualcomm.QCARUnityPlayer.QCARPlayerSharedActivity;
 import com.unity3d.player.UnityPlayer;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
 	
 	private QCARPlayerSharedActivity mQCARShared;
     public static TextView textoUnity;
     static public int variableInt=0;
+    static Activity thisActivity = null;
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
@@ -46,6 +49,7 @@ public class HomeFragment extends Fragment {
                 textoUnity=(TextView)rootView.findViewById(R.id.textViewUnity);
             }
         });
+        thisActivity = getActivity();
         return rootView;
     }
     @Override
@@ -77,5 +81,45 @@ public class HomeFragment extends Fragment {
     {
     	return variableInt;
     }
+    
+    static public void StatusRecognitionStart(String status){
+    	if(status.equals("")){
+    		Toast.makeText(thisActivity,"Enfoca joder!!!!!!",Toast.LENGTH_SHORT).show();
+    	}
+    }
+    
+    static public void setMultimedia(String NameARObjec, String LanguageInterface, String DescriptionText, int NumberAudios, int NumberGames, int NumberImages, int NumberVideos )
+    {
+    		// 
+    		Toast.makeText(thisActivity,"Multimedia " ,Toast.LENGTH_SHORT).show();
+    	
+    }
+    
+    static public void  ShowDialogLoadDataNewObject(String arNameObject){
+    		// dialogo de aceptar/cancelar llamar al metodo 
+    	// para juegos dos de perder el juego 
+    		Toast.makeText(thisActivity,"ShowDialogLoadDataNewObject"+ arNameObject,Toast.LENGTH_SHORT).show();
+    	
+    }
 
+    	
+    static public void  ShowToastTrackableFound(String trackableFound){
+    	
+		Toast.makeText(thisActivity,"ShowToastTrackableFound"+ trackableFound ,Toast.LENGTH_SHORT).show();
+	
+    }
+    
+    static public void  ShowToastRecognizedSameObject(){
+    	
+		Toast.makeText(thisActivity,"RecognizedSameObject" ,Toast.LENGTH_SHORT).show();
+	
+    }
+    
+    static public void  ShowToastTrackingLost(){
+    	
+		Toast.makeText(thisActivity,"ShowToastTrackingLost" ,Toast.LENGTH_SHORT).show();
+	
+    }
+    
+    
 }
