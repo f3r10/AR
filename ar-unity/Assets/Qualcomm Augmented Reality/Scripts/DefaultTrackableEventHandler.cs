@@ -92,17 +92,9 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 
         // 5. Render 3D objects and active children gameobject
 
-        rendererComponents = GetComponentsInChildren<Renderer>(true);
+        RenderingObjects(true);
 
-        foreach (Renderer component in rendererComponents)
-        {
-            component.enabled = true;
-
-            // use only videogames
-            component.gameObject.SetActive(true);
-        }
-
-        Debug.Log("Load Trackable " + mTrackableBehaviour.TrackableName + " data ok");
+        Debug.Log("Load Data ofTrackable " + mTrackableBehaviour.TrackableName + " OK");
     }
 
     #endregion // PUBLIC_METHODS
@@ -147,6 +139,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
                 else
                 {
                     LoadDataObject();
+                    CallMobileMethod("ShowToastTrackableFound");
                 }
             }
 
@@ -159,9 +152,14 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
             // 1.1.2 is game no started?
             if (!ResourceManager.Instance.IsGameStarted)
             {
-                AugmentedRealityGame.SetActive(true);
-                CallMobileMethod("ShowToastCanPlayGame");
                 
+                AugmentedRealityGame.SetActive(true);
+                
+                // Mensaje: el objeto se ha reconocido de nuevo
+                CallMobileMethod("ShowToastRecognizedSameObject");
+
+                //CallMobileMethod("ShowToastCanPlayGame");
+                RenderingObjects(true);
             }
         }
 
@@ -170,8 +168,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 
     private void OnTrackingLost()
     {
-        rendererComponents = GetComponentsInChildren<Renderer>(true);
-
+        // BUG: HACER DESDE ANDROID O CREAR GAMEOBJECT
         // 1. Inicializated application
         if (ResourceManager.Instance.NameARObject.Equals(""))
         {
@@ -182,7 +179,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
         // 2. tracking lost after tracking on
         
         // 2.1 is game Started? NO
-        if (!ResourceManager.Instance.IsGameStarted)
+        if (!ResourceManager.Instance.IsGameStarted) //BUG: Y SE RECONOCIO ALGO ANTERIORMENTE?
         {
             // 2.1.1 Disable videogame (in future, disable in foreach and delete public variable)
             AugmentedRealityGame.SetActive(false);
@@ -192,7 +189,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
         }
 
         // 2.2 is game paused? YES
-        if (ResourceManager.Instance.IsGamePaused)
+        else if (ResourceManager.Instance.IsGamePaused)
         {
             // 2.2.1 Show toast message request focus on the object
             CallMobileMethod("ShowToastTrackingLost");
@@ -204,19 +201,26 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
             CallMobileMethod("ShowToastTrackingLost");
         }
 
-        // 3. No render objects
-
-        rendererComponents = GetComponentsInChildren<Renderer>(true);
-
-        foreach (Renderer component in rendererComponents)
-        {
-            component.enabled = false;
-        }
+        // 3. No rendering objects
+        RenderingObjects(false);
 
         Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
     }
 
     // methods for toast and dialogs, preprocessor directives for all platforms (only android for this project)
+
+    private void RenderingObjects(bool rendering)
+    {
+        rendererComponents = GetComponentsInChildren<Renderer>(true);
+
+        foreach (Renderer component in rendererComponents)
+        {
+            component.enabled = rendering;
+            //component.gameObject.SetActive(false);
+
+            AugmentedRealityGame.SetActive(rendering);
+        }
+    }
 
     private void CallMobileMethod(string methodName)
     {
@@ -227,7 +231,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
         }
         #endif
 
-        Debug.Log(methodName);
+        Debug.Log(methodName+":"+gameObject.name);
     }
 
     private void CallMobileMethod(string methodName, params object[] args)
@@ -239,7 +243,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
         }
         #endif
 
-        Debug.Log(methodName);
+        Debug.Log(methodName + ":" + gameObject.name);
     }
 
     #endregion // PRIVATE_METHODS

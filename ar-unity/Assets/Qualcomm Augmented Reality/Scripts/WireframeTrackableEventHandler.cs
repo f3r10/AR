@@ -88,7 +88,7 @@ public class WireframeTrackableEventHandler : MonoBehaviour,
             component.enabled = true;
         }
 
-        Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+        Debug.Log("WireframeTrackableEventHandler Trackable " + mTrackableBehaviour.TrackableName + " found");
     }
 
 
@@ -115,7 +115,7 @@ public class WireframeTrackableEventHandler : MonoBehaviour,
         {
             component.enabled = false;
         }
-        Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+        Debug.Log("WireframeTrackableEventHandler Trackable " + mTrackableBehaviour.TrackableName + " lost");
     }
 
     #endregion // PRIVATE_METHODS
