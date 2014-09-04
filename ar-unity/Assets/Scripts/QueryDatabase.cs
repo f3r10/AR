@@ -105,15 +105,16 @@ public class QueryDatabase : MonoBehaviour
     // FALTA DEFINIR NOMBRE METODO EN ANDROID
     private void SendResourcesData()
     {
-        #if UNITY_ANDROID && !UNITY_EDITOR
+        #if UNITY_ANDROID 
         using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
         {
-            androidJavaClass.CallStatic("LoadMultimedia",ResourceManager.Instance.NameARObject
-                                                    ,ResourceManager.Instance.DescriptionText
-                                                    ,ResourceManager.Instance.NumberAudios
-                                                    ,ResourceManager.Instance.NumberGames
-                                                    ,ResourceManager.Instance.NumberImages
-                                                    ,ResourceManager.Instance.NumberVideos);
+            androidJavaClass.CallStatic("SetMultimedia", ResourceManager.Instance.NameARObject
+                                                        , ResourceManager.Instance.LanguageInterface
+                                                        , ResourceManager.Instance.DescriptionText
+                                                        , ResourceManager.Instance.NumberAudios
+                                                        , ResourceManager.Instance.NumberGames
+                                                        , ResourceManager.Instance.NumberImages
+                                                        , ResourceManager.Instance.NumberVideos);
         }
         
         #endif

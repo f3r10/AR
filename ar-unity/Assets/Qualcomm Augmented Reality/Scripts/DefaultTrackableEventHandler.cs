@@ -63,8 +63,12 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
     // Set language (option menu, in Android pass 2 parameters: ARname object and language)
     public void SetSingletonLanguage(string language)
     {
-        ResourceManager.Instance.LanguageInterface = language;
-        LoadDataObject();
+        if (!ResourceManager.Instance.LanguageInterface.Equals(language))
+        {
+            ResourceManager.Instance.LanguageInterface = language;
+            LoadDataObject();
+        } 
+       
     }
 
     // Load and set data of ar object recongnized
@@ -143,7 +147,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
                 else
                 {
                     LoadDataObject();
-                    CallMobileMethod("ShowToastTrackableFound");
+                    CallMobileMethod("ShowToastTrackableFound", gameObject.name);
                 }
             }
 
