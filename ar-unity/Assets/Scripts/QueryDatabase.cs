@@ -108,7 +108,7 @@ public class QueryDatabase : MonoBehaviour
         #if UNITY_ANDROID && !UNITY_EDITOR
         using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
         {
-            androidJavaClass.CallStatic("methodName",ResourceManager.Instance.NameARObject
+            androidJavaClass.CallStatic("LoadMultimedia",ResourceManager.Instance.NameARObject
                                                     ,ResourceManager.Instance.DescriptionText
                                                     ,ResourceManager.Instance.NumberAudios
                                                     ,ResourceManager.Instance.NumberGames
