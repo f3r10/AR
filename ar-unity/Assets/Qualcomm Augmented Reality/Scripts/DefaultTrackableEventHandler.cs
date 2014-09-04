@@ -63,8 +63,12 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
     // Set language (option menu, in Android pass 2 parameters: ARname object and language)
     public void SetSingletonLanguage(string language)
     {
-        ResourceManager.Instance.LanguageInterface = language;
-        LoadDataObject();
+        if (!ResourceManager.Instance.LanguageInterface.Equals(language))
+        {
+            ResourceManager.Instance.LanguageInterface = language;
+            LoadDataObject();
+        } 
+       
     }
 
     // Load and set data of ar object recongnized
@@ -86,13 +90,17 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
         // 3. Set trackable name
         ResourceManager.Instance.NameARObject = mTrackableBehaviour.name;
 
-        // 4. Query DB
+        // 4. Set: recognized object
+        ResourceManager.Instance.IsObjectRecognized = true;
+
+        // 5. Query DB
         DataBase.GetComponent<QueryDatabase>().GetNumberOfResources(ResourceManager.Instance.NameARObject,
                                                                     ResourceManager.Instance.LanguageInterface);
 
-        // 5. Render 3D objects and active children gameobject
-
+        // 6. Render 3D objects and active children gameobject
         RenderingObjects(true);
+
+        
 
         Debug.Log("Load Data ofTrackable " + mTrackableBehaviour.TrackableName + " OK");
     }
@@ -139,7 +147,7 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
                 else
                 {
                     LoadDataObject();
-                    CallMobileMethod("ShowToastTrackableFound");
+                    CallMobileMethod("ShowToastTrackableFound", gameObject.name);
                 }
             }
 
@@ -168,34 +176,36 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 
     private void OnTrackingLost()
     {
-        // BUG: HACER DESDE ANDROID O CREAR GAMEOBJECT
-        // 1. Inicializated application
-        if (ResourceManager.Instance.NameARObject.Equals(""))
-        {
-            // 1.1 Call to android, show toast "no focus"
-            CallMobileMethod("ShowToastNoFocus");
-        }
+        // BUG RESOLVED: SEE StatusRecognition gameobject and StatusRecognition script
+        //// 1. Inicializated application
+        //if (ResourceManager.Instance.NameARObject.Equals(""))
+        //{
+        //    // 1.1 Call to android, show toast "no focus"
+        //    CallMobileMethod("ShowToastNoFocus");
+        //}
         
         // 2. tracking lost after tracking on
-        
+
+        // BUG: Y SE RECONOCIO ALGO ANTERIORMENTE? solucionado por ahora desde el inicio de la aplicacion
         // 2.1 is game Started? NO
-        if (!ResourceManager.Instance.IsGameStarted) //BUG: Y SE RECONOCIO ALGO ANTERIORMENTE?
+        if (!ResourceManager.Instance.IsGameStarted && ResourceManager.Instance.IsObjectRecognized) 
         {
             // 2.1.1 Disable videogame (in future, disable in foreach and delete public variable)
             AugmentedRealityGame.SetActive(false);
 
-            // 2.1.2 Show toast message request focus on the object
+            // 2.1.2 Show toast message request focus on the object for play game 
             CallMobileMethod("ShowToastTrackingLost");
         }
 
         // 2.2 is game paused? YES
-        else if (ResourceManager.Instance.IsGamePaused)
+        if (ResourceManager.Instance.IsGamePaused && ResourceManager.Instance.IsGameStarted) // era else  if
         {
             // 2.2.1 Show toast message request focus on the object
             CallMobileMethod("ShowToastTrackingLost");
         }
+            // OJO SE PUEDE ESTAR EJECUTANDO 2 VECES
         // is game paused? NO
-        else
+        else if (!ResourceManager.Instance.IsGamePaused && ResourceManager.Instance.IsGameStarted)
         {
             //AugmentedRealityGame.pauseGame();
             CallMobileMethod("ShowToastTrackingLost");
@@ -203,6 +213,9 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 
         // 3. No rendering objects
         RenderingObjects(false);
+
+        // 4. Set: no recognized object
+        ResourceManager.Instance.IsObjectRecognized = false;
 
         Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
     }

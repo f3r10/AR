@@ -105,19 +105,20 @@ public class QueryDatabase : MonoBehaviour
     // FALTA DEFINIR NOMBRE METODO EN ANDROID
     private void SendResourcesData()
     {
-        #if UNITY_ANDROID && !UNITY_EDITOR
+        #if UNITY_ANDROID 
         using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
         {
-            androidJavaClass.CallStatic("LoadMultimedia",ResourceManager.Instance.NameARObject
-                                                    ,ResourceManager.Instance.DescriptionText
-                                                    ,ResourceManager.Instance.NumberAudios
-                                                    ,ResourceManager.Instance.NumberGames
-                                                    ,ResourceManager.Instance.NumberImages
-                                                    ,ResourceManager.Instance.NumberVideos);
+            androidJavaClass.CallStatic("SetMultimedia", ResourceManager.Instance.NameARObject
+                                                        , ResourceManager.Instance.LanguageInterface
+                                                        , ResourceManager.Instance.DescriptionText
+                                                        , ResourceManager.Instance.NumberAudios
+                                                        , ResourceManager.Instance.NumberGames
+                                                        , ResourceManager.Instance.NumberImages
+                                                        , ResourceManager.Instance.NumberVideos);
         }
         
         #endif
-        Debug.Log("send resources to Android: ");
+        Debug.Log("Send resources to Android ok ");
 
         Debug.Log("Singleton:");
         Debug.Log("Language interface: " + ResourceManager.Instance.LanguageInterface);
@@ -132,6 +133,7 @@ public class QueryDatabase : MonoBehaviour
         Debug.Log("isGamePaused: " + ResourceManager.Instance.IsGamePaused);
         Debug.Log("isMultimediaStarted: " + ResourceManager.Instance.IsMultimediaStarted);
         Debug.Log("isMultimediaPaused: " + ResourceManager.Instance.IsMultimediaPaused);
+        Debug.Log("isObjectRecognized: " + ResourceManager.Instance.IsObjectRecognized);
 
     }
 }

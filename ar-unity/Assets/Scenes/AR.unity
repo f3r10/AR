@@ -116,7 +116,7 @@ Prefab:
     - target: {fileID: 3300000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 951972073}
+      objectReference: {fileID: 740513209}
     - target: {fileID: 11400000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: mTrackableName
       value: ar_002
@@ -148,7 +148,7 @@ Prefab:
     - target: {fileID: 2300000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1647712314}
+      objectReference: {fileID: 1574686454}
     - target: {fileID: 400000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: m_LocalScale.x
       value: 5
@@ -247,7 +247,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 181360790}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!43 &951972073
+--- !u!43 &740513209
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -455,13 +455,52 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400006, guid: bf30d577eead1ef40bcf2b404289daf4, type: 2}
       propertyPath: CameraDirection
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bf30d577eead1ef40bcf2b404289daf4, type: 2}
   m_RootGameObject: {fileID: 1406141005}
   m_IsPrefabParent: 0
   m_IsExploded: 1
+--- !u!1 &1009185830
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1009185832}
+  - 114: {fileID: 1009185831}
+  m_Layer: 0
+  m_Name: MultimediaStatus
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1009185831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1009185830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 226191d9983ce8f4b868c0763977472f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1009185832
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1009185830}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!1 &1101996453
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,7 +542,7 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 1226908928}
   m_GameObject: {fileID: 1101996453}
-  m_Mesh: {fileID: 2032601331}
+  m_Mesh: {fileID: 1951194065}
 --- !u!114 &1101996456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,7 +568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mTrackableName: ar_001
-  mPreviousScale: {x: 315, y: 315, z: 315}
+  mPreviousScale: {x: 5, y: 5, z: 5}
   mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: QCAR/museoepn.xml
@@ -559,7 +598,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 1260133845}
+  - {fileID: 1570418323}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -662,7 +701,7 @@ Prefab:
     - target: {fileID: 3300000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 2032601331}
+      objectReference: {fileID: 1951194065}
     - target: {fileID: 11400000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: mTrackableName
       value: ar_001
@@ -682,7 +721,7 @@ Prefab:
     - target: {fileID: 2300000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 1260133845}
+      objectReference: {fileID: 1570418323}
     - target: {fileID: 400000, guid: 384a0d8cc71cef74a873b3353337ea2c, type: 2}
       propertyPath: m_LocalScale.x
       value: 5
@@ -712,32 +751,45 @@ Prefab:
   m_RootGameObject: {fileID: 1101996453}
   m_IsPrefabParent: 0
   m_IsExploded: 1
---- !u!21 &1260133845
-Material:
-  serializedVersion: 3
+--- !u!1 &1331950159
+GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: ar_001_scaledMaterial
-  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: []
-  m_CustomRenderQueue: -1
-  m_SavedProperties:
-    serializedVersion: 2
-    m_TexEnvs:
-      data:
-        first:
-          name: _MainTex
-        second:
-          m_Texture: {fileID: 2800000, guid: f7c206b7b4fe4812b8fd8b75094ef155, type: 3}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-    m_Floats: {}
-    m_Colors:
-      data:
-        first:
-          name: _Color
-        second: {r: .820895553, g: .820895553, b: .820895553, a: 1}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1331950161}
+  - 114: {fileID: 1331950160}
+  m_Layer: 0
+  m_Name: StatusRecognition
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1331950160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1331950159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50e8466360b81b043a0cd425f7e185d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1331950161
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1331950159}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
 --- !u!1 &1393606534
 GameObject:
   m_ObjectHideFlags: 0
@@ -883,7 +935,7 @@ MonoBehaviour:
   SynchronousVideo: 0
   mWorldCenterMode: 1
   mWorldCenter: {fileID: 0}
-  CameraDirection: 1
+  CameraDirection: 0
   MirrorVideoBackground: 0
 --- !u!81 &1406141011
 AudioListener:
@@ -995,7 +1047,7 @@ MeshFilter:
     type: 2}
   m_PrefabInternal: {fileID: 179061883}
   m_GameObject: {fileID: 1461713391}
-  m_Mesh: {fileID: 951972073}
+  m_Mesh: {fileID: 740513209}
 --- !u!114 &1461713394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1021,7 +1073,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mTrackableName: ar_002
-  mPreviousScale: {x: 1, y: 1, z: 1}
+  mPreviousScale: {x: 5, y: 5, z: 5}
   mPreserveChildSize: 0
   mInitializedInEditor: 1
   mDataSetPath: QCAR/museoepn.xml
@@ -1051,7 +1103,7 @@ Renderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 1647712314}
+  - {fileID: 1574686454}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1073,7 +1125,33 @@ Transform:
   - {fileID: 1102769158}
   m_Father: {fileID: 0}
   m_RootOrder: 4
---- !u!21 &1647712314
+--- !u!21 &1570418323
+Material:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: ar_001_scaledMaterial
+  m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: []
+  m_CustomRenderQueue: -1
+  m_SavedProperties:
+    serializedVersion: 2
+    m_TexEnvs:
+      data:
+        first:
+          name: _MainTex
+        second:
+          m_Texture: {fileID: 2800000, guid: f7c206b7b4fe4812b8fd8b75094ef155, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+    m_Floats: {}
+    m_Colors:
+      data:
+        first:
+          name: _Color
+        second: {r: .820895553, g: .820895553, b: .820895553, a: 1}
+--- !u!21 &1574686454
 Material:
   serializedVersion: 3
   m_ObjectHideFlags: 0
@@ -1297,7 +1375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb86097b9acc8d4a9cf3a8729b54943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!43 &2032601331
+--- !u!43 &1951194065
 Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}

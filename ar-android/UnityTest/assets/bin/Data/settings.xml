@@ -1,3 +1,13 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <integer name="gles_mode">0</integer>
+  <integer name="splash_mode">0</integer>
+  <bool name="hide_status_bar">True</bool>
+  <bool name="useObb">True</bool>
+  <bool name="development_player">True</bool>
+  <bool name="98cc964e6eabb3b8629c04aaeeff30cf">True</bool>
+=======
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
   <integer name="gles_mode">0</integer>
@@ -5,4 +15,5 @@
   <bool name="hide_status_bar">True</bool>
   <bool name="useObb">True</bool>
   <bool name="8272d89301a7e0d62c8ccd7ea4535cf9">True</bool>
+>>>>>>> f119875c5feaba8f49aed2fa08c95c5f7adf591f
 </settings>
