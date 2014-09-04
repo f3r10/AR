@@ -29,11 +29,10 @@ public class MainActivity extends FragmentActivity implements ActionBar.TabListe
 		actionBar.setHomeButtonEnabled(true);
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		// Adding Tabs
-		/*
 		for (String tab_name : tabs) {
 			actionBar.addTab(actionBar.newTab().setText(tab_name)
 					.setTabListener(this));
-		}*/
+		}
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

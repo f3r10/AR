@@ -40,12 +40,12 @@ public class GamesFragment extends Fragment {
                 mUnityPlayer.windowFocusChanged(true);
                 mUnityPlayer.resume();
                 
-              /*boton para llamar a unity
+              //boton para llamar a unity
                 final Button btnUnity=(Button)rootView.findViewById(R.id.buttonUnity);
                 btnUnity.setOnClickListener(new ButtonClickHandler());
                 
                 //textview que se modifica desde unity con Set
-                textoUnity=(TextView)rootView.findViewById(R.id.textViewUnity);*/
+                textoUnity=(TextView)rootView.findViewById(R.id.textViewUnity);
             }
         });
         return rootView;
