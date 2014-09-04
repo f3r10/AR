@@ -117,7 +117,7 @@ public class QueryDatabase : MonoBehaviour
         }
         
         #endif
-        Debug.Log("send resources to Android: ");
+        Debug.Log("Send resources to Android ok ");
 
         Debug.Log("Singleton:");
         Debug.Log("Language interface: " + ResourceManager.Instance.LanguageInterface);
@@ -132,6 +132,7 @@ public class QueryDatabase : MonoBehaviour
         Debug.Log("isGamePaused: " + ResourceManager.Instance.IsGamePaused);
         Debug.Log("isMultimediaStarted: " + ResourceManager.Instance.IsMultimediaStarted);
         Debug.Log("isMultimediaPaused: " + ResourceManager.Instance.IsMultimediaPaused);
+        Debug.Log("isObjectRecognized: " + ResourceManager.Instance.IsObjectRecognized);
 
     }
 }

@@ -36,6 +36,9 @@ public class ResourceManager
     
     private bool isMultimediaStarted = false;// started
     private bool isMultimediaPaused = false;
+
+    private bool isObjectRecognized = false;
+    
    
     #region PUBLIC METHODS
     public string DescriptionText
@@ -102,6 +105,12 @@ public class ResourceManager
     {
         get { return isMultimediaPaused; }
         set { isMultimediaPaused = value; }
+    }
+
+    public bool IsObjectRecognized
+    {
+        get { return isObjectRecognized; }
+        set { isObjectRecognized = value; }
     }
 
     #endregion // PUBLIC METHODS
