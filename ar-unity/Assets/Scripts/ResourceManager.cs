@@ -19,18 +19,26 @@ public class ResourceManager
         }
     }
     #endregion // SINGLETON IMPLEMENTATION
-
+    // Change in OnTrackingFound and Options Menu
     private string languageInterface = "spa";
     private string nameARObject;
-    private int numberAudios; 
-    private string descriptionText;  
+
+    // Query DB
+    private string descriptionText;
+    private int numberAudios;      
     private int numberGames;   
     private int numberImages;   
     private int numberVideos;
-    private bool isGamePlaying;   
-    private bool isMultimediaReproducing;
+    private bool isGamePlaying = false;
+    private bool isMultimediaReproducing = false;
     
     #region PUBLIC METHODS
+    public string DescriptionText
+    {
+        get { return descriptionText; }
+        set { descriptionText = value; }
+    }
+
     public string LanguageInterface
     {
         get { return languageInterface; }
@@ -47,12 +55,6 @@ public class ResourceManager
     {
         get { return numberAudios; }
         set { numberAudios = value; }
-    }
-
-    public string DescriptionText
-    {
-        get { return descriptionText; }
-        set { descriptionText = value; }
     }
 
     public int NumberGames
