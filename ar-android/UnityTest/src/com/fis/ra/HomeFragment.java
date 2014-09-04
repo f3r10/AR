@@ -1,22 +1,20 @@
 package com.fis.ra;
-import com.fis.ra.R;
 
 import com.qualcomm.QCARUnityPlayer.QCARPlayerSharedActivity;
 import com.unity3d.player.UnityPlayer;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
- 
-public class GamesFragment extends Fragment {
- 
-    private QCARPlayerSharedActivity mQCARShared;
+
+public class HomeFragment extends Fragment {
+	
+	private QCARPlayerSharedActivity mQCARShared;
     public static TextView textoUnity;
     static public int variableInt=0;
 	@Override
@@ -79,4 +77,5 @@ public class GamesFragment extends Fragment {
     {
     	return variableInt;
     }
+
 }
