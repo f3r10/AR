@@ -12,23 +12,25 @@ using UnityEngine;
 public class DefaultTrackableEventHandler : MonoBehaviour,
                                             ITrackableEventHandler
 {
+    #region PUBLIC_MEMBER_VARIABLES
+
+    public GameObject AugmentedRealityGame;
+    public GameObject DataBase;
+
+    #endregion // PUBLIC_MEMBER_VARIABLES
+
     #region PRIVATE_MEMBER_VARIABLES
  
     private TrackableBehaviour mTrackableBehaviour;
     Renderer[] rendererComponents;
-    string idTargetDataUnity;
-    // use only is necessary
-    // Collider[] colliderComponents;
 
     #endregion // PRIVATE_MEMBER_VARIABLES
-
-
 
     #region UNTIY_MONOBEHAVIOUR_METHODS
     
     void Start()
     {
-        idTargetDataUnity = "";
+
         mTrackableBehaviour = GetComponent<TrackableBehaviour>();
         if (mTrackableBehaviour)
         {
@@ -38,17 +40,13 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 
     #endregion // UNTIY_MONOBEHAVIOUR_METHODS
 
-
-
     #region PUBLIC_METHODS
 
     /// <summary>
     /// Implementation of the ITrackableEventHandler function called when the
     /// tracking state changes.
     /// </summary>
-    public void OnTrackableStateChanged(
-                                    TrackableBehaviour.Status previousStatus,
-                                    TrackableBehaviour.Status newStatus)
+    public void OnTrackableStateChanged(TrackableBehaviour.Status previousStatus, TrackableBehaviour.Status newStatus)
     {
         if (newStatus == TrackableBehaviour.Status.DETECTED ||
             newStatus == TrackableBehaviour.Status.TRACKED ||
@@ -61,130 +59,187 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
             OnTrackingLost();
         }
     }
-    
+
+    // Set language (option menu, in Android pass 2 parameters: ARname object and language)
+    public void SetSingletonLanguage(string language)
+    {
+        ResourceManager.Instance.LanguageInterface = language;
+        LoadDataObject();
+    }
+
+    // Load and set data of ar object recongnized
+    public void LoadDataObject()
+    {
+        // 1. Stop game
+        if (ResourceManager.Instance.IsGameStarted)
+        {
+            AugmentedRealityGame.SetActive(false);
+        }
+
+        // 2. Stop multimedia and go to Description o AR Fragment (SEE IN ANDROID)
+        if (ResourceManager.Instance.IsMultimediaStarted)
+        {
+            //go to other fragment
+            CallMobileMethod("StopMultimediaPlaying");
+        }
+
+        // 3. Set trackable name
+        ResourceManager.Instance.NameARObject = mTrackableBehaviour.name;
+
+        // 4. Query DB
+        DataBase.GetComponent<QueryDatabase>().GetNumberOfResources(ResourceManager.Instance.NameARObject,
+                                                                    ResourceManager.Instance.LanguageInterface);
+
+        // 5. Render 3D objects and active children gameobject
+
+        rendererComponents = GetComponentsInChildren<Renderer>(true);
+
+        foreach (Renderer component in rendererComponents)
+        {
+            component.enabled = true;
+
+            // use only videogames
+            component.gameObject.SetActive(true);
+        }
+
+        Debug.Log("Load Trackable " + mTrackableBehaviour.TrackableName + " data ok");
+    }
+
     #endregion // PUBLIC_METHODS
-
-
 
     #region PRIVATE_METHODS
 
 
     private void OnTrackingFound()
     {
-        // if old targer is equals to new target, do nothig, else if is no equals
-        // two cases: start app or recognize new target (diferent to old target)
-        if (!idTargetDataUnity.Equals(mTrackableBehaviour.TrackableName))
+        // 1. Inicializated application
+        // 1.1 is gameobject new? YES
+        if (!ResourceManager.Instance.NameARObject.Equals(mTrackableBehaviour.TrackableName))
         {
-            idTargetDataUnity = mTrackableBehaviour.TrackableName;
-
-            rendererComponents = GetComponentsInChildren<Renderer>(true);
-
-            // use only is necessary
-            // colliderComponents = GetComponentsInChildren<Collider>(true);
-
-            // Enable rendering:
-            foreach (Renderer component in rendererComponents)
+            // 1.1.1 is game started? YES
+            if (ResourceManager.Instance.IsGameStarted)
             {
-                component.enabled = true;
+                // se supone que lo esta jugando ya que esto es true si el juego esta en pausa o play, solo al
+                // salir o antes de iniciar se pone en false
 
-                // use only videogames
-                // component.gameObject.SetActive(true);
+                // 1.1.1.1 pause game
+                if (ResourceManager.Instance.IsGamePaused)
+                {
+                    // AugmentedRealityGame.pauseGame();
+                }
+
+                // 1.1.1.2 call Android Dialog
+                // Two dialogs, but unity call one
+                // Play sound
+                // Send gameObject name to back to this gameobject, script and LoadDataobject method
+                CallMobileMethod("ShowDialogLoadDataNewObject", gameObject.name);
+            } 
+            // NO (game not started)
+            else
+            {
+                // 1.1.1.3 call Android Dialog
+                // Not need pause media
+                if (ResourceManager.Instance.IsMultimediaPaused || ResourceManager.Instance.IsMultimediaStarted)
+                {
+                    CallMobileMethod("ShowDialogLoadDataNewObject", gameObject.name);
+                } 
+                // 1.1.1.3 Load data
+                else
+                {
+                    LoadDataObject();
+                }
             }
 
-            // use only is necessary
-            // Enable colliders:
-            //foreach (Collider component in colliderComponents)
-            //{
-            //    component.enabled = true;
-            //}
+        }
+        // NO (recognize the same object)
+        else
+        {
+            //AugmentedRealityGame.playGame();
 
+            // 1.1.2 is game no started?
+            if (!ResourceManager.Instance.IsGameStarted)
+            {
+                AugmentedRealityGame.SetActive(true);
+                CallMobileMethod("ShowToastCanPlayGame");
+                
+            }
+        }
 
-            // For debug
-            #if UNITY_ANDROID && !UNITY_EDITOR
-            ShowMobileToast("SetIdTarget", idTargetDataUnity);
-            #endif
-
-
-            #if UNITY_EDITOR
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
-            #endif
-            //CONSULTA DB
-        } 
-
+        Debug.Log("New Trackable " + mTrackableBehaviour.TrackableName + " found");
     }
 
     private void OnTrackingLost()
     {
-        // 1. inicializated application
-        if (idTargetDataUnity.Equals(""))
-        {
-            //call to android, show toast "no focus"
-            ShowMobileToast("ShowToastNoFocus");
+        rendererComponents = GetComponentsInChildren<Renderer>(true);
 
-
-            // For debug
-            #if UNITY_EDITOR
-            Debug.Log("Focus camera to object");
-            #endif
-        } 
-        else
+        // 1. Inicializated application
+        if (ResourceManager.Instance.NameARObject.Equals(""))
         {
-            // 2. tracking lost after tracking on
-            ShowMobileToast("ShowToastTrackingLost",idTargetDataUnity);
-            
-            // For debug
-            #if UNITY_EDITOR
-            Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
-            #endif
-            //FALTAN ACCIONES
+            // 1.1 Call to android, show toast "no focus"
+            CallMobileMethod("ShowToastNoFocus");
+        }
+        
+        // 2. tracking lost after tracking on
+        
+        // 2.1 is game Started? NO
+        if (!ResourceManager.Instance.IsGameStarted)
+        {
+            // 2.1.1 Disable videogame (in future, disable in foreach and delete public variable)
+            AugmentedRealityGame.SetActive(false);
+
+            // 2.1.2 Show toast message request focus on the object
+            CallMobileMethod("ShowToastTrackingLost");
         }
 
-        //PARA GAMEOBJECTS U OBJETOS EN 3D
+        // 2.2 is game paused? YES
+        if (ResourceManager.Instance.IsGamePaused)
+        {
+            // 2.2.1 Show toast message request focus on the object
+            CallMobileMethod("ShowToastTrackingLost");
+        }
+        // is game paused? NO
+        else
+        {
+            //AugmentedRealityGame.pauseGame();
+            CallMobileMethod("ShowToastTrackingLost");
+        }
+
+        // 3. No render objects
 
         rendererComponents = GetComponentsInChildren<Renderer>(true);
 
-        // use only is necessary
-        // colliderComponents = GetComponentsInChildren<Collider>(true);
-
-        // Disable rendering:
         foreach (Renderer component in rendererComponents)
         {
             component.enabled = false;
-
-            // use only videogames
-            // component.gameObject.SetActive(false);
         }
 
-        // use only is necessary
-        // Disable colliders:
-        //foreach (Collider component in colliderComponents)
-        //{
-        //    component.enabled = false;
-        //}
-
-        
+        Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
     }
 
-    // methods for toast, preprocessor directives for all platforms (only android for this project)
+    // methods for toast and dialogs, preprocessor directives for all platforms (only android for this project)
 
-    private void ShowMobileToast(string methodName)
+    private void CallMobileMethod(string methodName)
     {
-        #if UNITY_ANDROID
+        #if UNITY_ANDROID && !UNITY_EDITOR
         using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
         {
             androidJavaClass.CallStatic(methodName);
         }
-        #endif   
+        #endif
+
+        Debug.Log(methodName);
     }
 
-    private void ShowMobileToast(string methodName, params object[] args)
+    private void CallMobileMethod(string methodName, params object[] args)
     {
-        #if UNITY_ANDROID
+        #if UNITY_ANDROID && !UNITY_EDITOR
         using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
         {
             androidJavaClass.CallStatic(methodName,args);
         }
         #endif
+
+        Debug.Log(methodName);
     }
 
     #endregion // PRIVATE_METHODS

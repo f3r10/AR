@@ -100,7 +100,7 @@ public class ExtractOBBData : MonoBehaviour
     
     #endif
 
-    #if UNITY_EDITOR_WIN
+    #if UNITY_EDITOR
 
     void Awake()
     {

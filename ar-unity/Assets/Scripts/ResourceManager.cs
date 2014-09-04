@@ -19,9 +19,10 @@ public class ResourceManager
         }
     }
     #endregion // SINGLETON IMPLEMENTATION
+
     // Change in OnTrackingFound and Options Menu
     private string languageInterface = "spa";
-    private string nameARObject;
+    private string nameARObject = "";
 
     // Query DB
     private string descriptionText;
@@ -29,9 +30,13 @@ public class ResourceManager
     private int numberGames;   
     private int numberImages;   
     private int numberVideos;
-    private bool isGamePlaying = false;
-    private bool isMultimediaReproducing = false;
+
+    private bool isGameStarted = false;
+    private bool isGamePaused = false;
     
+    private bool isMultimediaStarted = false;// started
+    private bool isMultimediaPaused = false;
+   
     #region PUBLIC METHODS
     public string DescriptionText
     {
@@ -75,17 +80,31 @@ public class ResourceManager
         set { numberVideos = value; }
     }
 
-    public bool IsGamePlaying
+    public bool IsGameStarted
     {
-        get { return isGamePlaying; }
-        set { isGamePlaying = value; }
+        get { return isGameStarted; }
+        set { isGameStarted = value; }
     }
 
-    public bool IsMultimediaReproducing
+    public bool IsGamePaused
     {
-        get { return isMultimediaReproducing; }
-        set { isMultimediaReproducing = value; }
+        get { return isGamePaused; }
+        set { isGamePaused = value; }
+    }
+
+    public bool IsMultimediaStarted
+    {
+        get { return isMultimediaStarted; }
+        set { isMultimediaStarted = value; }
+    }
+
+    public bool IsMultimediaPaused
+    {
+        get { return isMultimediaPaused; }
+        set { isMultimediaPaused = value; }
     }
 
     #endregion // PUBLIC METHODS
+
+
 }
