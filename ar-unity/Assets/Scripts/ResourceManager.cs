@@ -3,10 +3,11 @@ using System.Collections;
 
 public class ResourceManager
 {
-    #region SINGLETON IMPLEMENTATION
+    #region OLD SINGLETON IMPLEMENTATION
+    /*
     private static ResourceManager instance = null;
 
-    protected ResourceManager() { }
+    protected ResourceManager() { Debug.Log("START SINGLETON"); }
 
     public static ResourceManager Instance
     {
@@ -18,7 +19,33 @@ public class ResourceManager
             return instance;
         }
     }
-    #endregion // SINGLETON IMPLEMENTATION
+     */
+    #endregion // OLD SINGLETON IMPLEMENTATION
+
+    #region NEW SINGLETON IMPLEMENTATION
+
+    private static volatile ResourceManager instance;
+    private static object _objToLock = new Object();
+
+    private ResourceManager() { Debug.Log("START SINGLETON"); }
+
+    public static ResourceManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                lock (_objToLock)
+                {
+                    if (instance == null)
+                        instance = new ResourceManager();
+                }
+            }
+            return instance;
+        }
+    }
+
+    #endregion // NEW SINGLETON IMPLEMENTATION
 
     // Change in OnTrackingFound and Options Menu
     private string languageInterface = "spa";
@@ -38,7 +65,10 @@ public class ResourceManager
     private bool isMultimediaPaused = false;
 
     private bool isObjectRecognized = false;
-    
+
+    private bool isDataExtracted = true;//true for test, is false
+    private bool isDataWritted = false;//TAL VEZ OMITIR
+    private bool isDataLoad = false;   
    
     #region PUBLIC METHODS
     public string DescriptionText
@@ -111,6 +141,24 @@ public class ResourceManager
     {
         get { return isObjectRecognized; }
         set { isObjectRecognized = value; }
+    }
+
+    public bool IsDataExtracted
+    {
+        get { return isDataExtracted; }
+        set { isDataExtracted = value;}
+    }
+
+    public bool IsDataWritted
+    {
+        get { return isDataWritted; }
+        set { isDataWritted = value; }
+    }
+
+    public bool IsDataLoad
+    {
+        get { return isDataLoad; }
+        set { isDataLoad = value; }
     }
 
     #endregion // PUBLIC METHODS

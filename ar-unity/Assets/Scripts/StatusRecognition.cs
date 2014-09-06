@@ -20,12 +20,16 @@ public class StatusRecognition : MonoBehaviour {
 
     private void CallMobileMethod(string methodName, params object[] args)
     {
-        #if UNITY_ANDROID && !UNITY_EDITOR
-        using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
+        //#if UNITY_ANDROID //&& !UNITY_EDITOR
+        using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra.HomeFragment"))
         {
-            androidJavaClass.CallStatic(methodName,args);
+            using (AndroidJavaObject activity = androidJavaClass.GetStatic<AndroidJavaObject>("mContext"))
+            {
+                activity.Call(methodName,args);
+            }
         }
-        #endif
+        //#endif
+         
 
         Debug.Log(methodName + ":" + gameObject.name);
     }

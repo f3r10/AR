@@ -71,16 +71,16 @@ PlayerSettings:
   productGUID: b9d71178c0e40a14b944ee09bf8e1e17
   iPhoneBundleVersion: 1.0
   AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 10
+  AndroidMinSdkVersion: 13
   AndroidPreferredInstallLocation: 0
   aotOptions: 
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 1
   iPhoneStrippingLevel: 0
   iPhoneScriptCallOptimization: 0
   ForceInternetPermission: 0
   ForceSDCardPermission: 1
   CreateWallpaper: 0
-  APKExpansionFiles: 1
+  APKExpansionFiles: 0
   StripUnusedMeshComponents: 0
   iPhoneSdkVersion: 988
   iPhoneTargetOSVersion: 16
