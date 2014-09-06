@@ -2,6 +2,8 @@ package com.fis.ra;
 
 
 
+import com.unity3d.player.UnityPlayer;
+
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -24,8 +26,10 @@ public class SettingsFragment extends Fragment {
 	        
 	        btn = (Button)rootView.findViewById(R.id.btnPrueba);
 	        btn.setOnClickListener(new ButtonClickHandler());
-	          
+	        //UnityPlayer.UnitySendMessage("SetSingletonLanguage", "NameARObjec", "idioma/spa, eng, que");
 	        return rootView;
+	        
+	        
 	    }
 	 
 	 
@@ -33,9 +37,12 @@ public class SettingsFragment extends Fragment {
 			//When button is clicked
 			public void onClick(View view) {
 				
-				fragment = new NotificationsFragment();
+				//fragment = new NotificationsFragment();
+				
+				fragment = new AboutFragment();
+				AboutFragment.setVideoUri("http://people.xiph.org/~maikmerten/demos/BigBuckBunny.ogv");
 				String saludo = "Hola";
-				((NotificationsFragment) fragment).setmyText(saludo);
+				//((NotificationsFragment) fragment).setmyText(saludo);
 				if (fragment != null) {
 					FragmentManager fragmentManager = getFragmentManager();
 					fragmentManager.beginTransaction()

@@ -150,13 +150,13 @@ public class MainActivity extends Activity {
 			fragment = new HomeFragment();
 			break;
 		case 1:
-			fragment = new HomeFragment();
+			fragment = new NotificationsFragment();
 			break;
 		case 2:
 			fragment = new SettingsFragment();
 			break;
 		case 3:
-			fragment = new HomeFragment();
+			fragment = new AboutFragment();
 			break;
 
 		default:
