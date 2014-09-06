@@ -20,17 +20,17 @@ public class QueryDatabase : MonoBehaviour
 
         #region Text of description
 
-        resultsTable = sqlDB.ExecuteQuery(@"SELECT D.description_text
+        resultsTable = sqlDB.ExecuteQuery(@"SELECT D.text_description
                                             FROM Description D
                                             JOIN AR_Object AR
                                             ON (D.id_ARObject=AR.id)
                                             JOIN Language L
                                             ON (D.id_language=L.id)
-                                            WHERE AR.name_ARObject="+"'"+arObject+"'"+
+                                            WHERE AR.name_ARObject=" +"'"+arObject+"'"+
                                             "AND L.languageISO="+"'"+language+"'");
 
-        ResourceManager.Instance.DescriptionText = resultsTable.Rows[0]["description_text"].ToString();
-        Debug.Log("DB text of "+ arObject+": "+resultsTable.Rows[0]["description_text"].ToString());
+        ResourceManager.Instance.DescriptionText = resultsTable.Rows[0]["text_description"].ToString();
+        Debug.Log("DB text of " + arObject + ": " + resultsTable.Rows[0]["text_description"].ToString());
         
         #endregion // Text of description
 
@@ -105,8 +105,8 @@ public class QueryDatabase : MonoBehaviour
     // FALTA DEFINIR NOMBRE METODO EN ANDROID
     private void SendResourcesData()
     {
-        #if UNITY_ANDROID 
-        using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
+        /*#if UNITY_ANDROID 
+        using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra.HomeFragment"))
         {
             androidJavaClass.CallStatic("SetMultimedia", ResourceManager.Instance.NameARObject
                                                         , ResourceManager.Instance.LanguageInterface
@@ -118,8 +118,10 @@ public class QueryDatabase : MonoBehaviour
         }
         
         #endif
-        Debug.Log("Send resources to Android ok ");
+         * /
+        Debug.Log("SEND RESOURCES TO ANDROID OK ");
 
+        /*
         Debug.Log("Singleton:");
         Debug.Log("Language interface: " + ResourceManager.Instance.LanguageInterface);
         Debug.Log("Name AR Object: "+ResourceManager.Instance.NameARObject);
@@ -134,6 +136,6 @@ public class QueryDatabase : MonoBehaviour
         Debug.Log("isMultimediaStarted: " + ResourceManager.Instance.IsMultimediaStarted);
         Debug.Log("isMultimediaPaused: " + ResourceManager.Instance.IsMultimediaPaused);
         Debug.Log("isObjectRecognized: " + ResourceManager.Instance.IsObjectRecognized);
-
+        */
     }
 }

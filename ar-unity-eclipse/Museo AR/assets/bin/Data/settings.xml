@@ -4,6 +4,5 @@
   <integer name="splash_mode">0</integer>
   <bool name="hide_status_bar">True</bool>
   <bool name="useObb">True</bool>
-  <bool name="development_player">True</bool>
-  <bool name="98cc964e6eabb3b8629c04aaeeff30cf">True</bool>
+  <bool name="23acaa4600dd2fe537787b2d6742abee">True</bool>
 </settings>

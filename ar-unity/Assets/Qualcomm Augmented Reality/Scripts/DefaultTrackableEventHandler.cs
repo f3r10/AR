@@ -48,16 +48,23 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
     /// </summary>
     public void OnTrackableStateChanged(TrackableBehaviour.Status previousStatus, TrackableBehaviour.Status newStatus)
     {
-        if (newStatus == TrackableBehaviour.Status.DETECTED ||
+        //if (ResourceManager.Instance.IsDataLoad)
+        //{
+            if (newStatus == TrackableBehaviour.Status.DETECTED ||
             newStatus == TrackableBehaviour.Status.TRACKED ||
             newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
-        {
-            OnTrackingFound();
-        }
-        else
-        {
-            OnTrackingLost();
-        }
+            {
+                OnTrackingFound();
+            }
+            else
+            {
+                OnTrackingLost();
+            }
+        //}
+        //else
+        //{
+        //    OnTrackingLost();// inicio de app
+        //}
     }
 
     // Set language (option menu, in Android pass 2 parameters: ARname object and language)
@@ -93,12 +100,14 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
         // 4. Set: recognized object
         ResourceManager.Instance.IsObjectRecognized = true;
 
+        // 6. Render 3D objects and active children gameobject
+        RenderingObjects(true);
+
         // 5. Query DB
         DataBase.GetComponent<QueryDatabase>().GetNumberOfResources(ResourceManager.Instance.NameARObject,
                                                                     ResourceManager.Instance.LanguageInterface);
 
-        // 6. Render 3D objects and active children gameobject
-        RenderingObjects(true);
+        
 
         
 
@@ -237,25 +246,25 @@ public class DefaultTrackableEventHandler : MonoBehaviour,
 
     private void CallMobileMethod(string methodName)
     {
-        #if UNITY_ANDROID && !UNITY_EDITOR
-        using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
+        /*#if UNITY_ANDROID && !UNITY_EDITOR
+        using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra.HomeFragment"))
         {
             androidJavaClass.CallStatic(methodName);
         }
-        #endif
-
+        //#endif
+        */
         Debug.Log(methodName+":"+gameObject.name);
     }
 
     private void CallMobileMethod(string methodName, params object[] args)
     {
-        #if UNITY_ANDROID && !UNITY_EDITOR
-        using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra"))
+        /*#if UNITY_ANDROID && !UNITY_EDITOR
+        using (AndroidJavaClass androidJavaClass = new AndroidJavaClass("com.fis.ra.HomeFragment"))
         {
             androidJavaClass.CallStatic(methodName,args);
         }
-        #endif
-
+        //#endif
+        */
         Debug.Log(methodName + ":" + gameObject.name);
     }
 
