@@ -170,6 +170,10 @@ public class HomeFragment extends Fragment {
 		}   	
     }
     
+    public static void GameButton(String message){
+    	
+    }
+    
     //GAME BUTTON HANDLED BY UNITY
     
     
