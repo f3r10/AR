@@ -1,6 +1,5 @@
 package com.fis.ra;
 
-import com.fis.ra.VideoControllerView.MediaPlayerControl;
 import com.qualcomm.QCARUnityPlayer.QCARPlayerSharedActivity;
 import com.unity3d.player.UnityPlayer;
 
@@ -15,18 +14,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment {
 	
 	private QCARPlayerSharedActivity mQCARShared;
-	static Toast toast;
     static Activity thisActivity = null;
     static Fragment fragment = null;
     static HomeFragment instance;
     private static Context context;
     static MediaPlayer audioInfo;
+    static Toast toast;
     
     //public static Context mContext;
     
@@ -39,8 +37,11 @@ public class HomeFragment extends Fragment {
         final UnityPlayer mUnityPlayer = new UnityPlayer(getActivity());
         final int mode = mUnityPlayer.getSettings().getInt("gles_mode", 1);  
         this.mQCARShared = new QCARPlayerSharedActivity();
+        //Toast.makeText(getActivity(),"Enfoca un objeto",Toast.LENGTH_SHORT).show();
+        toast = Toast.makeText(((Activity) HomeFragment.getCustomAppContext()),"Enfoca un objeto",Toast.LENGTH_SHORT);
         this.mQCARShared.onCreate(getActivity(), mode, new QCARPlayerSharedActivity.IUnityInitializer() {
         
+        	
         	
         	@Override
             public void InitializeUnity() {
@@ -180,15 +181,20 @@ public class HomeFragment extends Fragment {
     //MESSAGE METHODS
     
     public static void StatusRecognitionStart(){
-    	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
+    	Log.d("Android","TOAST CREADO HOMEFRAGMENT statusRecognition");
     	
-    	//Toast.makeText(thisActivity,"Enfoca un objeto",Toast.LENGTH_SHORT).show();
+    	//Toast.makeText(((Activity) HomeFragment.getCustomAppContext()),"Enfoca un objeto",Toast.LENGTH_SHORT).show();
+    	//toast.show();
+    	toast.setText("TOAST CREADO HOMEFRAGMENT statusRecognition");
+    	toast.show();
     }
     
     public static void StatusRecognitionStart(String status){
-    	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
+    	Log.d("Android","TOAST CREADO HOMEFRAGMENT statusRecongnition with param");
     	
-    	//Toast.makeText(thisActivity,"Enfoca un objeto",Toast.LENGTH_SHORT).show();
+    	toast.setText("TOAST CREADO HOMEFRAGMENT statusRecognition with param");
+    	toast.show();
+    	//Toast.makeText(((Activity) HomeFragment.getCustomAppContext()),"Enfoca un objeto",Toast.LENGTH_SHORT).show();
 
     }
      
@@ -211,12 +217,19 @@ public class HomeFragment extends Fragment {
     	
 		//Toast.makeText(thisActivity,"ShowToastTrackableFound"+ trackableFound ,Toast.LENGTH_SHORT).show();
     	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
+    	
+    	toast.setText("TOAST CREADO HOMEFRAGMENT ShowToastTrackableFound with param");
+    	toast.show();
     }
     
     public static void  ShowToastRecognizedSameObject(){
     	
 		//Toast.makeText(thisActivity,"RecognizedSameObject" ,Toast.LENGTH_SHORT).show();
     	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
+    	//Toast.makeText(((Activity) HomeFragment.getCustomAppContext()),"Enfoca un objeto",Toast.LENGTH_SHORT).show();
+    	
+    	toast.setText("TOAST CREADO HOMEFRAGMENT ShowToastRecognizedSameObject with param");
+    	toast.show();
 	
     }
     
@@ -224,6 +237,10 @@ public class HomeFragment extends Fragment {
     	
 		//Toast.makeText(thisActivity,"ShowToastTrackingLost" ,Toast.LENGTH_SHORT).show();
     	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
+    	
+    	toast.setText("TOAST CREADO HOMEFRAGMENT ShowToastTrackingLost");
+    	toast.show();
+    	
 	
     }
     
@@ -240,6 +257,9 @@ public class HomeFragment extends Fragment {
     	super.onPause();
     	
     }
+    
+    
+    
     
     
 }
