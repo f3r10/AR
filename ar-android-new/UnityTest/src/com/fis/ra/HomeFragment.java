@@ -1,11 +1,14 @@
 package com.fis.ra;
 
+import com.fis.ra.VideoControllerView.MediaPlayerControl;
 import com.qualcomm.QCARUnityPlayer.QCARPlayerSharedActivity;
 import com.unity3d.player.UnityPlayer;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,19 +23,24 @@ public class HomeFragment extends Fragment {
 	private QCARPlayerSharedActivity mQCARShared;
 	static Toast toast;
     static Activity thisActivity = null;
+    static Fragment fragment = null;
+    static HomeFragment instance;
+    private static Context context;
+    static MediaPlayer audioInfo;
     
     //public static Context mContext;
     
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
- 
-        final View rootView = inflater.inflate(R.layout.fragment_games, container, false);
+		context=getActivity();
+		audioInfo = MediaPlayer.create(HomeFragment.getCustomAppContext(),R.raw.robin);
+        final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         final UnityPlayer mUnityPlayer = new UnityPlayer(getActivity());
         final int mode = mUnityPlayer.getSettings().getInt("gles_mode", 1);  
         this.mQCARShared = new QCARPlayerSharedActivity();
         this.mQCARShared.onCreate(getActivity(), mode, new QCARPlayerSharedActivity.IUnityInitializer() {
-           
+        
         	
         	@Override
             public void InitializeUnity() {
@@ -57,11 +65,23 @@ public class HomeFragment extends Fragment {
         //mContext=getActivity().getApplicationContext();
         return rootView;
     }
+	
+	
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }
     
+    public static Context getCustomAppContext(){
+        return context;
+    }
+    
+    
+    @Override // research 
+    public void onActivityCreated(Bundle saved) { 
+        super.onActivityCreated(saved);
+        
+    }
     /*  IS NESCESARY?
     public class ButtonClickHandler implements View.OnClickListener {
 		//When button is clicked
@@ -81,22 +101,73 @@ public class HomeFragment extends Fragment {
     
     public static void DescriptionButton(String message){
     	Log.d("Android","ANDROID: DescriptionButton HA RECIBIDO EL STRING: "+message);
-    	//change corresponding fragment   	
+    	
+    	fragment = new DescriptionFragment();
+    	DescriptionFragment.setMsgUnity(message);
+		if (fragment != null) {
+			FragmentManager fragmentManager = ((Activity) HomeFragment.getCustomAppContext()).getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragment_detail, fragment).commit();
+			
+		} else {
+			Log.e("HomeFragment", "Error in creating Descriptionfragment");
+		}	
     }
     
     public static void AudioButton(String message){
     	Log.d("Android","ANDROID: DescriptionButton HA RECIBIDO EL STRING: "+message);
-    	//change corresponding fragment   	
+    	
+		// When 'create' returns the MediaPlayer is already in the prepared
+		// state and ready to go!
+    	if(audioInfo.isPlaying()){
+    		audioInfo.stop();
+    		//audioInfo.release();
+    	}else{
+    		audioInfo = MediaPlayer.create(HomeFragment.getCustomAppContext(),R.raw.robin);
+    		audioInfo.start();
+    	}
+    	
+    	/*
+    	fragment = new AudioFragment();
+    	AudioFragment.setmyText(message);
+		if (fragment != null) {
+			FragmentManager fragmentManager = ((Activity) HomeFragment.getCustomAppContext()).getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragment_detail, fragment).commit();
+			
+		} else {
+			Log.e("HomeFragment", "Error in creating AudioFragment");
+		}	   	*/
     }
     
     public static void ImageButton(String message){
     	Log.d("Android","ANDROID: DescriptionButton HA RECIBIDO EL STRING: "+message);
-    	//change corresponding fragment   	
+    	fragment = new ImagesFragment();
+    	ImagesFragment.setmyText(message);
+		if (fragment != null) {
+			FragmentManager fragmentManager = ((Activity) HomeFragment.getCustomAppContext()).getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragment_detail, fragment).commit();
+			
+		} else {
+			Log.e("HomeFragment", "Error in creating AudioFragment");
+		}	   	
     }
     
     public static void VideoButton(String message){
     	Log.d("Android","ANDROID: DescriptionButton HA RECIBIDO EL STRING: "+message);
-    	//change corresponding fragment   	
+    	audioInfo.stop();
+    	audioInfo.release();
+    	fragment = new VideoFragment();
+    	VideoFragment.setmyText(message);
+		if (fragment != null) {
+			FragmentManager fragmentManager = ((Activity) HomeFragment.getCustomAppContext()).getFragmentManager();
+			fragmentManager.beginTransaction()
+					.replace(R.id.fragment_detail, fragment).commit();
+			
+		} else {
+			Log.e("HomeFragment", "Error in creating VideoFragment");
+		}   	
     }
     
     //GAME BUTTON HANDLED BY UNITY
@@ -150,6 +221,20 @@ public class HomeFragment extends Fragment {
 		//Toast.makeText(thisActivity,"ShowToastTrackingLost" ,Toast.LENGTH_SHORT).show();
     	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
 	
+    }
+    
+    @Override
+    
+    public void onResume(){
+    	
+    	super.onResume();
+    }
+    
+    @Override
+    public void onPause(){
+    	
+    	super.onPause();
+    	
     }
     
     

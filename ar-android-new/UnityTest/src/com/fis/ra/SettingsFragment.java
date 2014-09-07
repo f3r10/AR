@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class SettingsFragment extends Fragment {
 	private Button btn;
@@ -23,7 +24,6 @@ public class SettingsFragment extends Fragment {
 	            Bundle savedInstanceState) {
 	  
 	        View rootView = inflater.inflate(R.layout.fragment_settings, container, false);
-	        
 	        btn = (Button)rootView.findViewById(R.id.btnPrueba);
 	        btn.setOnClickListener(new ButtonClickHandler());
 	        //UnityPlayer.UnitySendMessage("SetSingletonLanguage", "NameARObjec", "idioma/spa, eng, que");
@@ -32,7 +32,7 @@ public class SettingsFragment extends Fragment {
 	        
 	    }
 	 
-	 
+	
 	 public class ButtonClickHandler implements View.OnClickListener {
 			//When button is clicked
 			public void onClick(View view) {

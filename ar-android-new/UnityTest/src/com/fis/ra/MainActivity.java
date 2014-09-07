@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -40,6 +41,9 @@ public class MainActivity extends Activity {
 	//FOR UNITY
 	Toast toast;
 	public static Context mContext;
+	
+	// back button control
+	Fragment fragment = null;
 	
 	
 	@Override
@@ -161,7 +165,7 @@ public class MainActivity extends Activity {
 			fragment = new HomeFragment();
 			break;
 		case 1:
-			fragment = new NotificationsFragment();
+			fragment = new DescriptionFragment();
 			break;
 		case 2:
 			fragment = new SettingsFragment();
@@ -213,6 +217,35 @@ public class MainActivity extends Activity {
 		super.onConfigurationChanged(newConfig);
 		// Pass any configuration change to the drawer toggls
 		drawerToggle.onConfigurationChanged(newConfig);
+	}
+	
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+	    if (keyCode == KeyEvent.KEYCODE_BACK) {
+	        // your code
+	    	Log.d("back", "Al pulsar el boton de back");
+	    	fragment = new HomeFragment();
+			if (fragment != null) {
+				FragmentManager fragmentManager = getFragmentManager();
+				fragmentManager.beginTransaction()
+						.replace(R.id.fragment_detail, fragment).commit();
+
+				// Update selected item and title, then close the drawer
+				
+			} else {
+				// Log error
+				Log.e("MainActivity", "Error in creating fragment");
+			}
+			
+	        return true;
+	    }else if(keyCode == KeyEvent.KEYCODE_SETTINGS){
+	    	Log.d("settings", "pulsado botton settings");
+	    	lvSlidingMenu.setOnItemClickListener(new SlideMenuClickListener());
+	    	return true;
+	    	
+	    }
+
+	    return super.onKeyDown(keyCode, event);
 	}
 
 	
