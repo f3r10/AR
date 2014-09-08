@@ -23,7 +23,7 @@
 
     <!-- Generales (ge) -->
     <string name="title_activity_principal">PrincipalActivity</string>
-    <string name="app_name">Aplicación sin Nombre</string>
+    <string name="app_name">Look ARte</string>
 
     <!-- Principal (pa) -->
     <string name="ar_pa_btnIniciar">Iniciar</string>
