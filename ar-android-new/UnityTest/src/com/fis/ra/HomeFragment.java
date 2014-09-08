@@ -202,7 +202,7 @@ public class HomeFragment extends Fragment {
     {
     	Log.d("Android","DATOS RECIBIDOS CORRECTAMENTE");
     		//Toast.makeText(thisActivity,"Multimedia" ,Toast.LENGTH_SHORT).show();
-    	
+    	//falta generar los paths multimedia
     }
     
     public static void  ShowDialogLoadDataNewObject(String arNameObject){
