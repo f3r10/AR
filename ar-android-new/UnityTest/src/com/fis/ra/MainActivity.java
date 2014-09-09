@@ -18,6 +18,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -56,6 +57,11 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		appTitle = drawerTitle = getTitle();
+		
+		//full screen
+		
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		// Load resources
 		titles = getResources().getStringArray(R.array.nav_drawer_items);		
