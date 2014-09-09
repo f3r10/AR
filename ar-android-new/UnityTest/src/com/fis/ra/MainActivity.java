@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -171,13 +172,13 @@ public class MainActivity extends Activity {
 			fragment = new HomeFragment();
 			break;
 		case 1:
-			fragment = new DescriptionFragment();
+			fragment = new AboutFragment();
 			break;
 		case 2:
 			fragment = new SettingsFragment();
 			break;
 		case 3:
-			fragment = new AboutFragment();
+			quit();
 			break;
 
 		default:
@@ -252,6 +253,14 @@ public class MainActivity extends Activity {
 	    }
 
 	    return super.onKeyDown(keyCode, event);
+	}
+	
+	public void quit() {
+	    Intent startMain = new Intent(Intent.ACTION_MAIN);
+	    startMain.addCategory(Intent.CATEGORY_HOME);
+	    startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+	    startMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	    startActivity(startMain);
 	}
 
 	

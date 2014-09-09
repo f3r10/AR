@@ -13,10 +13,4 @@
         android:text="About"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <VideoView
-        android:id="@+id/videoAbout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true" />
-
 </RelativeLayout>

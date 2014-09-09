@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.net.Uri;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
@@ -26,6 +25,8 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback,
 	VideoControllerView controller;
 	private View rootView;
 	private static Context context;
+	
+	private static String stringVideoPath ="big_buck_bunny.mp4";
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -42,7 +43,7 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback,
 
 		try {
 			AssetFileDescriptor descriptor = getActivity().getAssets()
-                    .openFd("big_buck_bunny.mp4");
+                    .openFd(stringVideoPath);
 			player.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			player.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
 			descriptor.close();
@@ -75,6 +76,9 @@ public class VideoFragment extends Fragment implements SurfaceHolder.Callback,
 		Log.d("Prueba de mensajes", string);
 	}
 
+	public static void setVideoPath(final String path) {
+		stringVideoPath = path;
+	}
 	public static void setPauseVideo() {
 		Log.d("mediaController", "pause video");
 		player.pause();

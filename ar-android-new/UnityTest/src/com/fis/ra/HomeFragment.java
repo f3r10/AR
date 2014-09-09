@@ -1,5 +1,7 @@
 package com.fis.ra;
 
+import java.io.IOException;
+
 import com.qualcomm.QCARUnityPlayer.QCARPlayerSharedActivity;
 import com.unity3d.player.UnityPlayer;
 
@@ -7,6 +9,8 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
 
 public class HomeFragment extends Fragment {
 	
@@ -25,6 +30,7 @@ public class HomeFragment extends Fragment {
     private static Context context;
     static MediaPlayer audioInfo;
     static Toast toast;
+    private static String stringAudioPath ="robin.mp3";
     
     //public static Context mContext;
     
@@ -37,6 +43,23 @@ public class HomeFragment extends Fragment {
         final UnityPlayer mUnityPlayer = new UnityPlayer(getActivity());
         final int mode = mUnityPlayer.getSettings().getInt("gles_mode", 1);  
         this.mQCARShared = new QCARPlayerSharedActivity();
+        //audio
+        audioInfo = new MediaPlayer();
+        try {
+			AssetFileDescriptor descriptor = getActivity().getAssets()
+                    .openFd(stringAudioPath);
+			audioInfo.setAudioStreamType(AudioManager.STREAM_MUSIC);
+			audioInfo.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
+			descriptor.close();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
         //Toast.makeText(getActivity(),"Enfoca un objeto",Toast.LENGTH_SHORT).show();
         toast = Toast.makeText(((Activity) HomeFragment.getCustomAppContext()),"Enfoca un objeto",Toast.LENGTH_SHORT);
         this.mQCARShared.onCreate(getActivity(), mode, new QCARPlayerSharedActivity.IUnityInitializer() {
@@ -104,7 +127,7 @@ public class HomeFragment extends Fragment {
     	Log.d("Android","ANDROID: DescriptionButton HA RECIBIDO EL STRING: "+message);
     	
     	fragment = new DescriptionFragment();
-    	DescriptionFragment.setMsgUnity(message);
+    	
 		if (fragment != null) {
 			FragmentManager fragmentManager = ((Activity) HomeFragment.getCustomAppContext()).getFragmentManager();
 			fragmentManager.beginTransaction()
@@ -124,8 +147,24 @@ public class HomeFragment extends Fragment {
     		audioInfo.stop();
     		//audioInfo.release();
     	}else{
-    		audioInfo = MediaPlayer.create(HomeFragment.getCustomAppContext(),R.raw.robin);
-    		audioInfo.start();
+    		audioInfo = new MediaPlayer();
+            try {
+    			AssetFileDescriptor descriptor = HomeFragment.getCustomAppContext().getAssets()
+                        .openFd(stringAudioPath);
+    			audioInfo.setAudioStreamType(AudioManager.STREAM_MUSIC);
+    			audioInfo.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
+    			descriptor.close();
+    			audioInfo.start();
+    		} catch (IllegalArgumentException e) {
+    			e.printStackTrace();
+    		} catch (SecurityException e) {
+    			e.printStackTrace();
+    		} catch (IllegalStateException e) {
+    			e.printStackTrace();
+    		} catch (IOException e) {
+    			e.printStackTrace();
+    		}
+    		
     	}
     	
     	/*
@@ -203,6 +242,17 @@ public class HomeFragment extends Fragment {
     	Log.d("Android","DATOS RECIBIDOS CORRECTAMENTE");
     		//Toast.makeText(thisActivity,"Multimedia" ,Toast.LENGTH_SHORT).show();
     	//falta generar los paths multimedia
+    	
+    	//Description:
+    	//DescriptionFragment.setMsgUnity(message);
+    	
+    	// Video
+    	// VideoFragment.setVideoPath(message);
+    	
+    	// Audio en el mismo fragment del Unity
+    	// stringAudioPath = audioPath 
+    			
+    	// imagenes pendiente
     }
     
     public static void  ShowDialogLoadDataNewObject(String arNameObject){

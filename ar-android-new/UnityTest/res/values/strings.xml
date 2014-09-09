@@ -4,13 +4,19 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="description">Media Controls</string>
+    <string name="lenguaje">Escoje tu idioma</string>
+    <string name="Espaniol">Español</string>
+    <string name="Ingles">Ingles</string>
+    <string name="Quechua">Quechua</string>
+
+    
 
     <!-- Sliding Menu items -->
     <string-array name="nav_drawer_items">
         <item>Home</item>
-        <item>Notifications</item>
-        <item>Settings</item>
         <item>About</item>
+        <item>Opciones</item>
+        <item>Salir</item>
     </string-array>
 
     <!-- Sliding Menu item icons -->
