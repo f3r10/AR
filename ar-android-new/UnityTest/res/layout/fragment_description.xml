@@ -3,25 +3,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#66CCFF" >
+    
+    <ScrollView 
+        android:id="@+id/scrolly"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp">
 
-    
-    <TextView
-        android:id="@+id/tv_notifications"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Description"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-    
-    
-    <TextView
-        android:id="@+id/txtUnity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/tv_notifications"
-        android:layout_alignParentLeft="true"
-        android:layout_marginBottom="23dp"
-        android:layout_marginLeft="80dp" />
-
+        <TextView
+            android:id="@+id/txtUnity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            style="@style/LyricsText" />
+        
+    </ScrollView>
 </RelativeLayout>
