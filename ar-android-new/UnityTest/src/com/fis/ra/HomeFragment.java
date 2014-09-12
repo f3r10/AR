@@ -1,15 +1,14 @@
 package com.fis.ra;
 
 import java.io.IOException;
-
-import com.qualcomm.QCARUnityPlayer.QCARPlayerSharedActivity;
-import com.unity3d.player.UnityPlayer;
+import java.io.InputStream;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
+import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -19,6 +18,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import com.qualcomm.QCARUnityPlayer.QCARPlayerSharedActivity;
+import com.unity3d.player.UnityPlayer;
 
 
 public class HomeFragment extends Fragment {
@@ -135,7 +137,7 @@ public class HomeFragment extends Fragment {
 			
 		} else {
 			Log.e("HomeFragment", "Error in creating Descriptionfragment");
-		}	
+		}
     }
     
     public static void AudioButton(String message){
@@ -181,7 +183,7 @@ public class HomeFragment extends Fragment {
     }
     
     public static void ImageButton(String message){
-    	Log.d("Android","ANDROID: DescriptionButton HA RECIBIDO EL STRING: "+message);
+    	Log.d("Android","ANDROID: ImageButton HA RECIBIDO EL STRING: "+message);
     	fragment = new ImagesFragment();
     	ImagesFragment.setmyText(message);
 		if (fragment != null) {
@@ -190,12 +192,13 @@ public class HomeFragment extends Fragment {
 					.replace(R.id.fragment_detail, fragment).commit();
 			
 		} else {
-			Log.e("HomeFragment", "Error in creating AudioFragment");
+			Log.e("HomeFragment", "Error in creating ImageFragment");
 		}	   	
     }
     
     public static void VideoButton(String message){
     	Log.d("Android","ANDROID: DescriptionButton HA RECIBIDO EL STRING: "+message);
+    	
     	audioInfo.stop();
     	audioInfo.release();
     	fragment = new VideoFragment();
@@ -252,7 +255,17 @@ public class HomeFragment extends Fragment {
     	// Audio en el mismo fragment del Unity
     	// stringAudioPath = audioPath 
     			
-    	// imagenes pendiente
+    	// Set image path
+    	InputStream inputStream = null;
+    	try {
+    		AssetManager am = context.getAssets();//u have get assets path from this ocde
+    		//FIXME: Replace default value with image path
+    		inputStream = am.open("Pictures/a5.jpg");
+		} catch (IOException e) {
+		}
+    	Log.d("Image","Set image path as inputStream");
+    	ImagesFragment.setImagePath(inputStream);
+    	
     }
     
     public static void  ShowDialogLoadDataNewObject(String arNameObject){
