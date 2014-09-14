@@ -34,6 +34,8 @@ public class HomeFragment extends Fragment {
     static Toast toast;
     private static String stringAudioPath ="robin.mp3";
     
+    private static DialogoConfirmacion dialog = new DialogoConfirmacion();
+    
     //public static Context mContext;
     
 	@Override
@@ -224,19 +226,19 @@ public class HomeFragment extends Fragment {
     
     public static void StatusRecognitionStart(){
     	Log.d("Android","TOAST CREADO HOMEFRAGMENT statusRecognition");
-    	
-    	//Toast.makeText(((Activity) HomeFragment.getCustomAppContext()),"Enfoca un objeto",Toast.LENGTH_SHORT).show();
-    	//toast.show();
+    
+
     	toast.setText("Enfoca a un objeto para ver sus datos");
     	toast.show();
+
     }
     
     public static void StatusRecognitionStart(String status){
     	Log.d("Android","TOAST CREADO HOMEFRAGMENT statusRecongnition with param");
     	
-    	toast.setText("TOAST CREADO HOMEFRAGMENT statusRecognition with param");
-    	toast.show();
-    	//Toast.makeText(((Activity) HomeFragment.getCustomAppContext()),"Enfoca un objeto",Toast.LENGTH_SHORT).show();
+    	//toast.setText("TOAST CREADO HOMEFRAGMENT statusRecognition with param");
+    	//toast.show();
+    	//dialog.show(((Activity) HomeFragment.getCustomAppContext()).getFragmentManager(), "dialog");
 
     }
      
@@ -300,12 +302,14 @@ public class HomeFragment extends Fragment {
 	
 	public static void  ShowToastTrackingLost(String message){
 		
-		//Toast.makeText(thisActivity,"ShowToastTrackingLost" ,Toast.LENGTH_SHORT).show();
-		Log.d("Android","TOAST CREADO HOMEFRAGMENT");
-		
-		toast.setText(message);
-		toast.show();
-		
+
+    	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
+    	
+    	//toast.setText("TOAST CREADO HOMEFRAGMENT ShowToastTrackingLost");
+    	//toast.show();
+    	dialog.show(((Activity) HomeFragment.getCustomAppContext()).getFragmentManager(), "dialog");
+    	
+
 	
 	}
     
