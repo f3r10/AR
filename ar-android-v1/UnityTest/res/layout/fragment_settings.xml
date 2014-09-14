@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#66CCFF" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:textColor="@android:color/black"
+        android:text="@string/lenguaje" />
+
+    <Button
+        android:id="@+id/btnEspaniol"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="@string/Espaniol" />
+
+    <Button
+        android:id="@+id/btnIngles"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/btnEspaniol"
+        android:layout_centerVertical="true"
+        android:text="@string/Ingles" />
+
+    <Button
+        android:id="@+id/btnQuechua"
+        android:layout_width="100dp"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/btnIngles"
+        android:layout_below="@+id/btnIngles"
+        android:layout_marginTop="18dp"
+        android:text="@string/Quechua" />
+
+</RelativeLayout>
