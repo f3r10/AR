@@ -23,7 +23,7 @@ import com.qualcomm.QCARUnityPlayer.QCARPlayerSharedActivity;
 import com.unity3d.player.UnityPlayer;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements MediaPlayer.OnPreparedListener {
 	
 	private QCARPlayerSharedActivity mQCARShared;
     static Activity thisActivity = null;
@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
     private static Context context;
     static MediaPlayer audioInfo;
     static Toast toast;
-    private static String stringAudioPath ="robin.mp3";
+    private static String stringAudioPath ="Audio/robin.mp3";
     
     private static DialogoConfirmacion dialog = new DialogoConfirmacion();
     
@@ -42,13 +42,15 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
 		context=getActivity();
-		//audioInfo = MediaPlayer.create(HomeFragment.getCustomAppContext(),R.raw.robin);
+		audioInfo = MediaPlayer.create(HomeFragment.getCustomAppContext(),R.raw.robin);
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         final UnityPlayer mUnityPlayer = new UnityPlayer(getActivity());
         final int mode = mUnityPlayer.getSettings().getInt("gles_mode", 1);  
         this.mQCARShared = new QCARPlayerSharedActivity();
         //audio
-        audioInfo = new MediaPlayer();
+        
+        /*audioInfo = new MediaPlayer();
+        
         try {
 			AssetFileDescriptor descriptor = getActivity().getAssets()
                     .openFd(stringAudioPath);
@@ -63,7 +65,7 @@ public class HomeFragment extends Fragment {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		}
+		}*/
         //Toast.makeText(getActivity(),"Enfoca un objeto",Toast.LENGTH_SHORT).show();
         toast = Toast.makeText(((Activity) HomeFragment.getCustomAppContext()),"Enfoca un objeto",Toast.LENGTH_SHORT);
         this.mQCARShared.onCreate(getActivity(), mode, new QCARPlayerSharedActivity.IUnityInitializer() {
@@ -147,8 +149,10 @@ public class HomeFragment extends Fragment {
     	
 		// When 'create' returns the MediaPlayer is already in the prepared
 		// state and ready to go!
+    	
     	if(audioInfo.isPlaying()){
     		audioInfo.stop();
+    		
     		//audioInfo.release();
     	}else{
     		audioInfo = new MediaPlayer();
@@ -158,7 +162,8 @@ public class HomeFragment extends Fragment {
     			audioInfo.setAudioStreamType(AudioManager.STREAM_MUSIC);
     			audioInfo.setDataSource(descriptor.getFileDescriptor(), descriptor.getStartOffset(), descriptor.getLength());
     			descriptor.close();
-    			audioInfo.start();
+    			audioInfo.prepare();
+    			
     		} catch (IllegalArgumentException e) {
     			e.printStackTrace();
     		} catch (SecurityException e) {
@@ -168,6 +173,8 @@ public class HomeFragment extends Fragment {
     		} catch (IOException e) {
     			e.printStackTrace();
     		}
+            
+            audioInfo.start();
     		
     	}
     	
@@ -328,6 +335,13 @@ public class HomeFragment extends Fragment {
     	super.onPause();
     	
     }
+
+
+	@Override
+	public void onPrepared(MediaPlayer arg0) {
+		// TODO Auto-generated method stub
+		audioInfo.start();
+	}
     
     
     
