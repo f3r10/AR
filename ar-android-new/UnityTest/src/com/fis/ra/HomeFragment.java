@@ -274,9 +274,12 @@ public class HomeFragment extends Fragment {
 			// dialogo de aceptar/cancelar llamar al metodo 
 		// para juegos dos de perder el juego 
 		Log.d("Android","TOAST CREADO HOMEFRAGMENT");
+		//send message to unity
+		dialog.setTrackableFound(arNameObject);
 		// DIALOG!!!
 		toast.setText("Objeto "+arNameObject+" reconocido. Desea cargar la informacion de este objeto?");
 		toast.show();
+		dialog.show(((Activity) HomeFragment.getCustomAppContext()).getFragmentManager(), "dialog");
 	}
 
 	
@@ -285,8 +288,15 @@ public class HomeFragment extends Fragment {
 		//Toast.makeText(thisActivity,"ShowToastTrackableFound"+ trackableFound ,Toast.LENGTH_SHORT).show();
 		Log.d("Android","TOAST CREADO HOMEFRAGMENT");
 		
+		// dialog action
+		DialogoConfirmacion.setTrackableFound(trackableFound);
+		dialog.show(((Activity) HomeFragment.getCustomAppContext()).getFragmentManager(), "dialog");
+		
+		
+		// end dialog action
 		toast.setText("Objeto "+trackableFound+" reconocido");
 		toast.show();
+		
 	}
 	
 	public static void  ShowToastRecognizedSameObject(){
@@ -297,6 +307,7 @@ public class HomeFragment extends Fragment {
 		
 		toast.setText("Se ha reconocido el mismo objeto");
 		toast.show();
+		//dialog.show(((Activity) HomeFragment.getCustomAppContext()).getFragmentManager(), "dialog");
 	
 	}
 	
@@ -305,9 +316,9 @@ public class HomeFragment extends Fragment {
 
     	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
     	
-    	//toast.setText("TOAST CREADO HOMEFRAGMENT ShowToastTrackingLost");
-    	//toast.show();
-    	dialog.show(((Activity) HomeFragment.getCustomAppContext()).getFragmentManager(), "dialog");
+    	toast.setText("TOAST CREADO HOMEFRAGMENT ShowToastTrackingLost");
+    	toast.show();
+    	//dialog.show(((Activity) HomeFragment.getCustomAppContext()).getFragmentManager(), "dialog");
     	
 
 	
