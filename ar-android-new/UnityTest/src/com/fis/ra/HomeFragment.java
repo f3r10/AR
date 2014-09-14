@@ -227,7 +227,7 @@ public class HomeFragment extends Fragment {
     	
     	//Toast.makeText(((Activity) HomeFragment.getCustomAppContext()),"Enfoca un objeto",Toast.LENGTH_SHORT).show();
     	//toast.show();
-    	toast.setText("TOAST CREADO HOMEFRAGMENT statusRecognition");
+    	toast.setText("Enfoca a un objeto para ver sus datos");
     	toast.show();
     }
     
@@ -269,43 +269,45 @@ public class HomeFragment extends Fragment {
     }
     
     public static void  ShowDialogLoadDataNewObject(String arNameObject){
-    		// dialogo de aceptar/cancelar llamar al metodo 
-    	// para juegos dos de perder el juego 
-    		//Toast.makeText(thisActivity,"ShowDialogLoadDataNewObject"+ arNameObject,Toast.LENGTH_SHORT).show();
-    	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
-    }
+			// dialogo de aceptar/cancelar llamar al metodo 
+		// para juegos dos de perder el juego 
+		Log.d("Android","TOAST CREADO HOMEFRAGMENT");
+		// DIALOG!!!
+		toast.setText("Objeto "+arNameObject+" reconocido. Desea cargar la informacion de este objeto?");
+		toast.show();
+	}
 
-    	
-    public static void  ShowToastTrackableFound(String trackableFound){
-    	
+	
+	public static void  ShowToastTrackableFound(String trackableFound){
+		
 		//Toast.makeText(thisActivity,"ShowToastTrackableFound"+ trackableFound ,Toast.LENGTH_SHORT).show();
-    	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
-    	
-    	toast.setText("TOAST CREADO HOMEFRAGMENT ShowToastTrackableFound with param");
-    	toast.show();
-    }
-    
-    public static void  ShowToastRecognizedSameObject(){
-    	
+		Log.d("Android","TOAST CREADO HOMEFRAGMENT");
+		
+		toast.setText("Objeto "+trackableFound+" reconocido");
+		toast.show();
+	}
+	
+	public static void  ShowToastRecognizedSameObject(){
+		
 		//Toast.makeText(thisActivity,"RecognizedSameObject" ,Toast.LENGTH_SHORT).show();
-    	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
-    	//Toast.makeText(((Activity) HomeFragment.getCustomAppContext()),"Enfoca un objeto",Toast.LENGTH_SHORT).show();
-    	
-    	toast.setText("TOAST CREADO HOMEFRAGMENT ShowToastRecognizedSameObject with param");
-    	toast.show();
+		Log.d("Android","TOAST CREADO HOMEFRAGMENT");
+		//Toast.makeText(((Activity) HomeFragment.getCustomAppContext()),"Enfoca un objeto",Toast.LENGTH_SHORT).show();
+		
+		toast.setText("Se ha reconocido el mismo objeto");
+		toast.show();
 	
-    }
-    
-    public static void  ShowToastTrackingLost(){
-    	
+	}
+	
+	public static void  ShowToastTrackingLost(String message){
+		
 		//Toast.makeText(thisActivity,"ShowToastTrackingLost" ,Toast.LENGTH_SHORT).show();
-    	Log.d("Android","TOAST CREADO HOMEFRAGMENT");
-    	
-    	toast.setText("TOAST CREADO HOMEFRAGMENT ShowToastTrackingLost");
-    	toast.show();
-    	
+		Log.d("Android","TOAST CREADO HOMEFRAGMENT");
+		
+		toast.setText(message);
+		toast.show();
+		
 	
-    }
+	}
     
     @Override
     
