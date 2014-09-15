@@ -258,10 +258,11 @@ public class HomeFragment extends Fragment implements MediaPlayer.OnPreparedList
     	DescriptionFragment.setMsgUnity(DescriptionText);
     	
     	// Video
-    	VideoFragment.setVideoPath("Video/big_buck_bunny.mp4");
-    	
+    	String stringVideo = "Video/" + NameARObjec+ "_video.mp4";
+    	VideoFragment.setVideoPath(stringVideo);
+    	Log.d("Audio", NameARObjec);
     	// Audio en el mismo fragment del Unity
-    	stringAudioPath = "Audio/"+NameARObjec+"_audio.mp3";
+    	stringAudioPath = "Audio/"+NameARObjec+"_audio.mp4";
     	// Set image path
     	String[] allImages = PathImages.split("-");
     	
