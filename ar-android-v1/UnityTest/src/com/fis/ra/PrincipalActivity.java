@@ -33,7 +33,6 @@ public class PrincipalActivity extends Activity {
 	public class Salir implements View.OnClickListener {
 		public void onClick(View view) {
 			finish();
-
 		}
 	}
 
