@@ -1,14 +1,12 @@
 package com.fis.ra;
 
 import java.io.IOException;
-import java.io.InputStream;
 
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -250,7 +248,7 @@ public class HomeFragment extends Fragment implements MediaPlayer.OnPreparedList
 
     }
      
-    public static void SetMultimedia(String NameARObjec, String LanguageInterface, String DescriptionText, int NumberAudios, int NumberGames, int NumberImages, int NumberVideos )
+    public static void SetMultimedia(String NameARObjec, String LanguageInterface, String DescriptionText, int NumberAudios, int NumberGames, String PathImages, int NumberVideos )
     {
     	Log.d("Android","DATOS RECIBIDOS CORRECTAMENTE");
     		//Toast.makeText(thisActivity,"Multimedia" ,Toast.LENGTH_SHORT).show();
@@ -264,17 +262,12 @@ public class HomeFragment extends Fragment implements MediaPlayer.OnPreparedList
     	
     	// Audio en el mismo fragment del Unity
     	stringAudioPath = "Audio/"+NameARObjec+"_audio.mp3";
-    			
     	// Set image path
-    	InputStream inputStream = null;
-    	try {
-    		AssetManager am = context.getAssets();//u have get assets path from this ocde
-    		//FIXME: Replace default value with image path
-    		inputStream = am.open("Pictures/a5.jpg");
-		} catch (IOException e) {
-		}
-    	Log.d("Image","Set image path as inputStream");
-    	ImagesFragment.setImagePath(inputStream);
+    	String[] allImages = PathImages.split("-");
+    	
+    	Log.d("Images","Set images path");
+    	Log.d("Images",PathImages);
+    	ImagesFragment.setImagePath(allImages);
     	
     }
     

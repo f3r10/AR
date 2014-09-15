@@ -1,8 +1,10 @@
 package com.fis.ra;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -17,18 +19,16 @@ import android.widget.ImageView;
 public class ImageAdapter extends PagerAdapter {
 	Context context;
 	
-	private int[] GalImages = new int[] { R.drawable.a1, R.drawable.a2,
-			R.drawable.a3 };
-	private InputStream stringImagePath;
+	private String[] stringImagePath;
 
-	public ImageAdapter(Context context,InputStream path) {
+	public ImageAdapter(Context context,String[] path) {
 		this.context = context;
 		this.stringImagePath = path;
 	}
 
 	@Override
 	public int getCount() {
-		return GalImages.length;
+		return stringImagePath.length;
 	}
 
 	@Override
@@ -48,9 +48,8 @@ public class ImageAdapter extends PagerAdapter {
 		int height = displaymetrics.heightPixels;
 		int width = displaymetrics.widthPixels;
 		imageView.setImageBitmap(decodeSampledBitmapFromInputStream(
-				context.getResources(), stringImagePath, width, height));
+				context.getResources(), getInputStreamFromString(stringImagePath[position]), width, height));
 
-		Log.d("Prueba de mensajes", "carga imagen: " + position);
 		((ViewPager) container).addView(imageView, 0);
 		return imageView;
 	}
@@ -58,6 +57,18 @@ public class ImageAdapter extends PagerAdapter {
 	@Override
 	public void destroyItem(ViewGroup container, int position, Object object) {
 		((ViewPager) container).removeView((ImageView) object);
+	}
+	
+	private InputStream getInputStreamFromString(String imagePath){
+		InputStream inputStream = null;
+    	try {
+    		AssetManager am = context.getAssets();
+    		inputStream = am.open(imagePath);
+		} catch (IOException e) {
+		}
+    	Log.d("Image","Set image path as inputStream");
+    	
+    	return inputStream;
 	}
 
 	public static Bitmap decodeSampledBitmapFromInputStream(Resources res,

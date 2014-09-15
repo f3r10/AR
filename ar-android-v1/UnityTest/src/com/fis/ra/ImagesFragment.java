@@ -1,8 +1,6 @@
 package com.fis.ra;
 
 
-import java.io.InputStream;
-
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -13,7 +11,7 @@ import android.view.ViewGroup;
 
 public class ImagesFragment extends Fragment {
 	
-	private static InputStream stringImagePath = null;
+	private static String[] allImagesPath = null;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -24,7 +22,7 @@ public class ImagesFragment extends Fragment {
 		
 		ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.view_pager);
 		
-		ImageAdapter adapter = new ImageAdapter(getActivity().getApplicationContext(),stringImagePath);
+		ImageAdapter adapter = new ImageAdapter(getActivity().getApplicationContext(),allImagesPath);
 		viewPager.setAdapter(adapter);
 
 		return rootView;
@@ -34,7 +32,7 @@ public class ImagesFragment extends Fragment {
 		Log.d("Prueba de mensajes", string);
 		}
 
-	public static void setImagePath(final InputStream path) {
-		stringImagePath = path;
+	public static void setImagePath(final String[] path) {
+		allImagesPath = path;
 	}
 }
