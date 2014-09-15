@@ -2,5 +2,6 @@
 <resources>
 
     <color name="fondo_pantalla">#2E64FE</color>
+    <color name="texto_inicio ">#0A0A2A</color>
 
 </resources>

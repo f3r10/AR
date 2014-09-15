@@ -1,4 +1,4 @@
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,32 +9,41 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.fis.ra.PrincipalActivity" >
 
-    <TableRow android:gravity="center" >
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/app_name"
+        android:src="@drawable/titulo" />
 
-        <TextView
-            android:id="@+id/textViewUnity"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/app_name" />
-    </TableRow>
+    <Button
+        android:id="@+id/btnIniciar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/botoniniciar"
+        android:gravity="center_vertical" />
 
-    <TableRow android:gravity="center" >
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:gravity="center"
+        android:text="@string/ar_pa_btnIniciar"
+        android:textColor="@color/texto_inicio "
+        android:textSize="23sp" />
 
-        <Button
-            android:id="@+id/btnIniciar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ar_pa_btnIniciar" />
-    </TableRow>
+    <Button
+        android:id="@+id/btnSalir"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/botonsalir" >
+    </Button>
 
-    <TableRow android:gravity="center" >
-
-        <Button
-            android:id="@+id/btnSalir"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/ar_pa_btnSalir" />
-    </TableRow>
-
-</TableLayout>
+</RelativeLayout>
