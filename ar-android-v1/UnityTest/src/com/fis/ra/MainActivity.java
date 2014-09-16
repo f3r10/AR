@@ -175,7 +175,8 @@ public class MainActivity extends Activity {
 			fragment = new AboutFragment();
 			break;
 		case 2:
-			fragment = new SettingsFragment();
+			fragment = new HelpFragment();
+			//quit();
 			break;
 		case 3:
 			quit();

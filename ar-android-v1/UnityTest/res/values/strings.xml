@@ -15,7 +15,7 @@
     <string-array name="nav_drawer_items">
         <item>Home</item>
         <item>About</item>
-        <item>Opciones</item>
+        <item>Ayuda</item>
         <item>Salir</item>
     </string-array>
 
