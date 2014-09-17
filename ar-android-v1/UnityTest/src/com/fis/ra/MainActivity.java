@@ -3,7 +3,6 @@ package com.fis.ra;
 
 import java.util.ArrayList;
 
-
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -23,6 +22,8 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import com.fis.ra.ObbExpansionsManager.ObbListener;
 
 public class MainActivity extends Activity {
 	
@@ -51,6 +52,25 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		/*
+		// OBB LOAD
+				final ObbListener listener = new ObbListener() {
+					
+					@Override
+					public void onMountSuccess() {
+						// TODO Auto-generated method stub
+						Log.d("ObbExpansions", "on mount success obblistener.");
+					}
+					
+					@Override
+					public void onFilesNotFound() {
+						// TODO Auto-generated method stub
+						Log.d("ObbExpansions", "on file not found obblistener.");
+					}
+				};
+				ObbExpansionsManager.createNewInstance(this,listener);
+				
+		*/
 		
 		//FOR UNITY
 		
