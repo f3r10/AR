@@ -257,12 +257,35 @@ public class MainActivity extends Activity {
 	}
 	
 	public void quit() {
+		HomeFragment.mQCARShared.onDestroy(); 
 	    Intent startMain = new Intent(Intent.ACTION_MAIN);
 	    startMain.addCategory(Intent.CATEGORY_HOME);
 	    startMain.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	    startMain.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	    startActivity(startMain);
+	   // startActivity(startMain);
+	    System.exit(0);
 	}
+	
+@Override
+    
+    public void onResume(){
+    	super.onResume();
+    }
+    
+    @Override
+    public void onPause(){
+    	super.onPause();
+    	
+    }
+    
+    
+    @Override
+    
+    public void onDestroy(){
+    	super.onDestroy();
+    	HomeFragment.mQCARShared.onDestroy();
+    	System.exit(0); 
+    }
 
 	
 	

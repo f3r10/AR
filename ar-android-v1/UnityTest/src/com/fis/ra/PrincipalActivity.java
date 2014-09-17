@@ -35,5 +35,22 @@ public class PrincipalActivity extends Activity {
 			finish();
 		}
 	}
+	
+	
+	public void onResume(){
+    	super.onResume();
+    }
+    
+    @Override
+    public void onPause(){
+    	super.onPause();
+    	
+    }
+    @Override
+    
+    public void onDestroy(){
+    	super.onDestroy();
+    	System.exit(0); 
+    }
 
 }

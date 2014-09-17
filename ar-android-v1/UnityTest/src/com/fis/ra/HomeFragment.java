@@ -23,7 +23,7 @@ import com.unity3d.player.UnityPlayer;
 
 public class HomeFragment extends Fragment implements MediaPlayer.OnPreparedListener {
 	
-	private QCARPlayerSharedActivity mQCARShared;
+	public static QCARPlayerSharedActivity mQCARShared;
     static Activity thisActivity = null;
     static Fragment fragment = null;
     static HomeFragment instance;
@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment implements MediaPlayer.OnPreparedList
         final View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         final UnityPlayer mUnityPlayer = new UnityPlayer(getActivity());
         final int mode = mUnityPlayer.getSettings().getInt("gles_mode", 1);  
-        this.mQCARShared = new QCARPlayerSharedActivity();
+        HomeFragment.mQCARShared = new QCARPlayerSharedActivity();
         //audio
         
         /*audioInfo = new MediaPlayer();
@@ -319,15 +319,22 @@ public class HomeFragment extends Fragment implements MediaPlayer.OnPreparedList
     @Override
     
     public void onResume(){
-    	
+    	mQCARShared.onResume();
     	super.onResume();
     }
     
     @Override
     public void onPause(){
-    	
+    	mQCARShared.onPause();
     	super.onPause();
     	
+    }
+    
+    
+    @Override
+    public void onDestroy(){
+    	//mQCARShared.onDestroy();
+    	super.onDestroy();
     }
 
 
