@@ -23,7 +23,7 @@ public class ObbExpansionsManager {
     private String packageName;
     private int packageVersion;
 
-    private String main;
+    private static String main;
     private File mainFile;
     private static String patch;
     private File patchFile;
@@ -237,10 +237,11 @@ public class ObbExpansionsManager {
      * @param pathToFile - path to file inside of .obb
      * @return
      */
-    public File getFileFromMain(String pathToFile) {
+    public static File getFileFromMain(String pathToFile) {
         if (!pathToFile.startsWith(File.separator)) {
             pathToFile = File.separator + pathToFile;
         }
+        Log.d("Error","main: " + main);
         File file = new File(main + pathToFile);
         if (file.exists()) {
             return file;

@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		/*
+		
 		// OBB LOAD
 				final ObbListener listener = new ObbListener() {
 					
@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
 				};
 				ObbExpansionsManager.createNewInstance(this,listener);
 				
-		*/
+		
 		
 		//FOR UNITY
 		
