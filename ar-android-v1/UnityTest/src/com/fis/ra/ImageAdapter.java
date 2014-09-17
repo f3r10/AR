@@ -1,11 +1,10 @@
 package com.fis.ra;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -63,13 +62,14 @@ public class ImageAdapter extends PagerAdapter {
 	private InputStream getInputStreamFromString(String imagePath){
 		InputStream inputStream = null;
     	try {
-    		Log.d("Error","trata de setear imagen");
+    		/*Log.d("Error","trata de setear imagen");
     		File imagen = ObbExpansionsManager.getFileFromMain("assets/" + imagePath);
     		Log.d("Error","pasa el setear imagen");
     		Log.d("Error","nomrbe imagen main: " + imagen.getName());
-    		//AssetManager am = context.getAssets();
-    		//inputStream = am.open(imagePath);
-    		inputStream = new FileInputStream (imagen);
+    		inputStream = new FileInputStream (imagen);*/
+    		AssetManager am = context.getAssets();
+    		inputStream = am.open(imagePath);
+    		
 		} catch (IOException e) {
 			Log.d("Error","muere al setear imagen");
 			Log.d("Error","Set image path as inputStream");
